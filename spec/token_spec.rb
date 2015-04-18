@@ -19,10 +19,11 @@ describe "AppleDEPClient::Token" do
   end
 
   describe ".save_data" do
-    let(:data) { {consumer_key: 'asdf'} }
+    let(:data) { {consumer_key: 'asdf', access_token: 'qwer'} }
     it 'can save data' do
       AppleDEPClient::Token.save_data(data)
       expect(AppleDEPClient.consumer_key).to eq 'asdf'
+      expect(AppleDEPClient.access_token).to eq 'qwer'
     end
   end
 end

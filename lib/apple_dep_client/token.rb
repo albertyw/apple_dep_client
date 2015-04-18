@@ -3,6 +3,9 @@ require 'openssl'
 
 module AppleDEPClient
   module Token
+    SERVER_TOKEN_KEYS = [:consumer_key, :consumer_secret, :access_token, :access_secret, :access_token_expiry]
+    SERVER_TOKEN_KEYS.freeze
+
     # Given an S/MIME encrypted Server Token, return a hash of token values
     # From the MDM Protocol information, it seems all tokens are PKCS7-MIME encrypted
     def self.decode_token(smime_data)
@@ -18,11 +21,9 @@ module AppleDEPClient
     end
 
     def self.save_data(data)
-      AppleDEPClient.consumer_key = data[:consumer_key]
-      AppleDEPClient.consumer_secret = data[:consumer_secret]
-      AppleDEPClient.access_token = data[:access_token]
-      AppleDEPClient.access_secret = data[:access_secret]
-      AppleDEPClient.access_token_expiry = data[:access_token_expiry]
+      SERVER_TOKEN_KEYS.each do |k|
+        AppleDEPClient.instance_variable_set("@#{k}", data[k])
+      end
     end
   end
 end
