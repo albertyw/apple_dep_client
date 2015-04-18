@@ -1,5 +1,7 @@
 # Apple Device Enrollment Program Client
 
+[ ![Codeship Status for cellabus/apple_dep_client](https://codeship.com/projects/c0524f60-c7a7-0132-b06e-4a390261e3f5/status?branch=master)](https://codeship.com/projects/74982)
+
 This gem allows for easy interaction with the Apple DEP API.
 
 ## Usage
