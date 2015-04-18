@@ -1,3 +1,5 @@
+# Configuration for AppleDEPClient
+
 module AppleDEPClient
   module Configuration
     DEP_CONFIG = [

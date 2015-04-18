@@ -1,3 +1,5 @@
+# Methods for processing DEP Server Tokens
+
 require 'json'
 require 'openssl'
 
