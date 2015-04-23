@@ -2,13 +2,17 @@ require 'spec_helper'
 
 describe "AppleDEPClient::Token" do
   describe ".decode_token" do
-    xit "can receive and decrypt an AppleDEPClient Token" do
-
+    it "can receive and decrypt an AppleDEPClient Token" do
+      expect(AppleDEPClient::Token).to receive(:parse_data).once
+      expect(AppleDEPClient::Token).to receive(:create_temp_file).twice.and_call_original
+      expect(AppleDEPClient::Token).to receive(:remove_temp_file).twice
+      expect(AppleDEPClient::Token).to receive(:run_command).once
+      AppleDEPClient::Token.decode_token('sample data', 'sample key')
     end
   end
 
   describe ".parse_data" do
-    let(:data) { '{"consumer_key": "asdf"}' }
+    let(:data) { "-----BEGIN MESSAGE-----\n{\"consumer_key\": \"asdf\"}\n-----END MESSAGE-----" }
     it 'can parse JSON data and return it' do
       expect(AppleDEPClient::Token.parse_data(data)).to eq ({consumer_key: 'asdf'})
     end
