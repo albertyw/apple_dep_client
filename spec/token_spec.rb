@@ -36,5 +36,11 @@ describe "AppleDEPClient::Token" do
       expect(AppleDEPClient.consumer_key).to eq 'asdf'
       expect(AppleDEPClient.access_token).to eq 'qwer'
     end
+    it 'will not overwrite lambdas' do
+      AppleDEPClient.consumer_key = lambda { 'lambda' }
+      AppleDEPClient::Token.save_data(data)
+      expect(AppleDEPClient.consumer_key).to eq 'lambda'
+      expect(AppleDEPClient.access_token).to eq 'qwer'
+    end
   end
 end

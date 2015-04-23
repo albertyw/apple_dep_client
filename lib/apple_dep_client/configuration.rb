@@ -1,4 +1,6 @@
 # Configuration for AppleDEPClient
+# Configuration values can be either literals or Procs; note that Procs will not
+# be overwritten by AppleDEPClient::Token.save_data
 
 module AppleDEPClient
   module Configuration

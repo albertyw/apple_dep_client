@@ -57,7 +57,9 @@ module AppleDEPClient
 
     def self.save_data(data)
       SERVER_TOKEN_KEYS.each do |k|
-        AppleDEPClient.instance_variable_set("@#{k}", data[k])
+        if not AppleDEPClient.instance_variable_get("@#{k}").respond_to? :call
+          AppleDEPClient.instance_variable_set("@#{k}", data[k])
+        end
       end
     end
   end
