@@ -24,7 +24,7 @@ module AppleDEPClient
     def self.make_headers
       session_auth_token = AppleDEPClient::Auth.get_session_token
       {
-        'User-Agent' => 'CellabusMDM/0.1',
+        'User-Agent' => "CellabusMDM/#{AppleDEPClient::VERSION}",
         'X-Server-Protocol-Version' => '2',
         'X-ADM-Auth-Session' => session_auth_token,
         'Content-Type' => 'application/json;charset=UTF8',
