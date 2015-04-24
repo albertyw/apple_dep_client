@@ -17,7 +17,7 @@ module AppleDEPClient
         headers: headers
       )
       request.run
-      check_response request.response
+      AppleDEPClient::Error.check_request_error request.response
       JSON.parse request.response.body
     end
 
@@ -29,10 +29,6 @@ module AppleDEPClient
         'X-ADM-Auth-Session' => session_auth_token,
         'Content-Type' => 'application/json;charset=UTF8',
       }
-    end
-
-    def self.check_response response
-      AppleDEPClient::Error.check_request_error response
     end
   end
 end

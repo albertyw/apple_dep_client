@@ -9,7 +9,7 @@ describe AppleDEPClient::Request do
       expect(AppleDEPClient::Request).to receive(:make_headers).once
       response = Typhoeus::Response.new(return_code: :ok, response_code: 200, body: '[]')
       Typhoeus.stub('url').and_return response
-      expect(AppleDEPClient::Request).to receive(:check_response).with(response).once
+      expect(AppleDEPClient::Error).to receive(:check_request_error).with(response).once
       body = AppleDEPClient::Request.make_request('url', 'get', 'asdf')
       expect(body).to eq []
     end
@@ -17,7 +17,7 @@ describe AppleDEPClient::Request do
       expect(AppleDEPClient::Request).to_not receive(:make_headers)
       response = Typhoeus::Response.new(return_code: :ok, response_code: 200, body: '{"qwer": 2}')
       Typhoeus.stub('url').and_return response
-      expect(AppleDEPClient::Request).to receive(:check_response).with(response).once
+      expect(AppleDEPClient::Error).to receive(:check_request_error).with(response).once
       body = AppleDEPClient::Request.make_request('url', 'get', 'asdf', {})
       expect(body).to eq({"qwer" => 2})
     end

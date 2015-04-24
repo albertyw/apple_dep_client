@@ -1,11 +1,42 @@
 require 'spec_helper'
 
 describe AppleDEPClient::Error do
+  describe ".check_request_error" do
+    it "checks each error class" do
+      response = Typhoeus::Response.new
+      AppleDEPClient::Error.get_error_classes.each do |x|
+        expect(x).to receive(:check_response).with response
+      end
+      AppleDEPClient::Error.check_request_error response
+    end
+    it "raises an error if a class returns true" do
+      response = Typhoeus::Response.new
+      expect(AppleDEPClient::Error::MalformedRequest).to receive(:check_response).and_return true
+      expect{AppleDEPClient::Error.check_request_error response}.to raise_error AppleDEPClient::Error::MalformedRequest
+    end
+  end
+  describe ".get_error_classes" do
+    it "returns all error classes" do
+      classes = AppleDEPClient::Error.get_error_classes
+      expect(classes.include? AppleDEPClient::Error::ExpiredCursor).to be_truthy
+      expect(classes.include? AppleDEPClient::Error::Auth::Forbidden).to be_falsey
+      expect(classes.include? AppleDEPClient::Error::GenericError).to be_truthy
+    end
+    it "can also return auth classes" do
+      classes = AppleDEPClient::Error.get_error_classes(auth=true)
+      expect(classes.include? AppleDEPClient::Error::ExpiredCursor).to be_falsey
+      expect(classes.include? AppleDEPClient::Error::Auth::Forbidden).to be_truthy
+      expect(classes.include? AppleDEPClient::Error::GenericError).to be_truthy
+    end
+  end
   describe AppleDEPClient::Error::AbstractRequestError do
     subject { AppleDEPClient::Error::AbstractRequestError }
     let(:body) { 'asdf' }
     it "takes a body" do
       expect { raise subject.new(body) }.to raise_error RuntimeError
+    end
+    it "has no check_response function" do
+      expect{ subject.check_response 'x' }.to raise_error NotImplementedError
     end
   end
   describe AppleDEPClient::Error::Auth do
