@@ -8,17 +8,19 @@ describe AppleDEPClient::Error do
       expect { raise subject.new(body) }.to raise_error RuntimeError
     end
   end
-  describe AppleDEPClient::Error::AuthBadRequest do
-    subject { AppleDEPClient::Error::AuthBadRequest }
-    specify { expect(subject).to be }
-  end
-  describe AppleDEPClient::Error::AuthUnauthorized do
-    subject { AppleDEPClient::Error::AuthUnauthorized }
-    specify { expect(subject).to be }
-  end
-  describe AppleDEPClient::Error::AuthForbidden do
-    subject { AppleDEPClient::Error::AuthForbidden }
-    specify { expect(subject).to be }
+  describe AppleDEPClient::Error::Auth do
+    describe AppleDEPClient::Error::Auth::BadRequest do
+      subject { AppleDEPClient::Error::Auth::BadRequest }
+      specify { expect(subject).to be }
+    end
+    describe AppleDEPClient::Error::Auth::Unauthorized do
+      subject { AppleDEPClient::Error::Auth::Unauthorized }
+      specify { expect(subject).to be }
+    end
+    describe AppleDEPClient::Error::Auth::Forbidden do
+      subject { AppleDEPClient::Error::Auth::Forbidden }
+      specify { expect(subject).to be }
+    end
   end
   describe AppleDEPClient::Error::MalformedRequest do
     subject { AppleDEPClient::Error::MalformedRequest }

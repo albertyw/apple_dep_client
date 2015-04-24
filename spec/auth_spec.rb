@@ -41,17 +41,17 @@ describe AppleDEPClient::Auth do
     end
   end
   describe ".parse_error" do
-    it "can raise AuthBadRequest" do
+    it "can raise BadRequest" do
       response = Typhoeus::Response.new(return_code: :bad_request, response_code: 400)
-      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::AuthBadRequest
+      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::Auth::BadRequest
     end
-    it "can raise AuthUnauthorized" do
+    it "can raise Unauthorized" do
       response = Typhoeus::Response.new(return_code: :unauthorized, response_code: 401)
-      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::AuthUnauthorized
+      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::Auth::Unauthorized
     end
-    it "can raise AuthForbidden" do
+    it "can raise Forbidden" do
       response = Typhoeus::Response.new(return_code: :forbidden, response_code: 403)
-      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::AuthForbidden
+      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::Auth::Forbidden
     end
     it "can raise RequestError" do
       response = Typhoeus::Response.new(return_code: :server_error, response_code: 500)

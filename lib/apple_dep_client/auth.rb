@@ -54,11 +54,11 @@ module AppleDEPClient
     def self.parse_error response
       case response.code
       when 400
-        raise AppleDEPClient::Error::AuthBadRequest.new response.body
+        raise AppleDEPClient::Error::Auth::BadRequest.new response.body
       when 401
-        raise AppleDEPClient::Error::AuthUnauthorized.new response.body
+        raise AppleDEPClient::Error::Auth::Unauthorized.new response.body
       when 403
-        raise AppleDEPClient::Error::AuthForbidden.new response.body
+        raise AppleDEPClient::Error::Auth::Forbidden.new response.body
       else
         raise AppleDEPClient::Error::RequestError.new response.body
       end

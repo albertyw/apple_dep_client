@@ -8,12 +8,15 @@ module AppleDEPClient
         @body = body
       end
     end
-    # Used by AppleDEPClient::Auth
-    class AuthBadRequest < RequestError
-    end
-    class AuthUnauthorized < RequestError
-    end
-    class AuthForbidden < RequestError
+
+    module Auth
+      # Used by AppleDEPClient::Auth
+      class BadRequest < RequestError
+      end
+      class Unauthorized < RequestError
+      end
+      class Forbidden < RequestError
+      end
     end
 
     # Used by AppleDEPClient::Request
