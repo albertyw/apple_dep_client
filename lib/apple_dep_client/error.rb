@@ -25,5 +25,19 @@ module AppleDEPClient
     end
     class MethodNotAllowed < RequestError
     end
+
+    # Used by AppleDEPClient::Device
+    class InvalidCursor < RequestError
+    end
+    class ExhaustedCursor < RequestError
+    end
+    class CursorRequired < RequestError
+    end
+    class ExpiredCursor < RequestError
+    end
+    class NotFound < RequestError
+    end
+    class DeviceIDRequired < RequestError
+    end
   end
 end

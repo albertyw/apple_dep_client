@@ -36,4 +36,28 @@ describe AppleDEPClient::Error do
     subject { AppleDEPClient::Error::MethodNotAllowed }
     specify { expect(subject).to be }
   end
+  describe AppleDEPClient::Error::InvalidCursor do
+    subject { AppleDEPClient::Error::InvalidCursor }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::ExhaustedCursor do
+    subject { AppleDEPClient::Error::ExhaustedCursor }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::CursorRequired do
+    subject { AppleDEPClient::Error::CursorRequired }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::ExpiredCursor do
+    subject { AppleDEPClient::Error::ExpiredCursor }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::NotFound do
+    subject { AppleDEPClient::Error::NotFound }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::DeviceIDRequired do
+    subject { AppleDEPClient::Error::DeviceIDRequired }
+    specify { expect(subject).to be }
+  end
 end
