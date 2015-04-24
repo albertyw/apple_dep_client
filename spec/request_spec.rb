@@ -32,30 +32,4 @@ describe AppleDEPClient::Request do
       expect(headers['Content-Type']).to eq 'application/json;charset=UTF8'
     end
   end
-  describe ".check_response" do
-    it "will not raise an error if the response is ok" do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 200, body: '')
-      expect{AppleDEPClient::Request.check_response response}.to_not raise_error
-    end
-    it "can raise a MalformedRequest error" do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 400, body: ' MALFORMED_REQUEST_BODY ')
-      expect{AppleDEPClient::Request.check_response response}.to raise_error AppleDEPClient::Error::MalformedRequest
-    end
-    it "can raise a Unauthorized error" do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 401, body: 'UNAUTHORIZED')
-      expect{AppleDEPClient::Request.check_response response}.to raise_error AppleDEPClient::Error::Unauthorized
-    end
-    it "can raise a Forbidden error" do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 403, body: 'FORBIDDEN')
-      expect{AppleDEPClient::Request.check_response response}.to raise_error AppleDEPClient::Error::Forbidden
-    end
-    it "can raise a MethodNotAllowed error" do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 405)
-      expect{AppleDEPClient::Request.check_response response}.to raise_error AppleDEPClient::Error::MethodNotAllowed
-    end
-    it "can raise an error" do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 500)
-      expect{AppleDEPClient::Request.check_response response}.to raise_error AppleDEPClient::Error::GenericError
-    end
-  end
 end
