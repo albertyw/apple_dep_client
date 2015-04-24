@@ -2,16 +2,20 @@
 
 module AppleDEPClient
   module Error
-    def self.check_request_error response
-      get_error_classes.each do |c|
+    def self.check_request_error(response, auth=false)
+      get_error_classes(auth).each do |c|
         if c.check_response response
           raise c.new response.body
         end
       end
     end
 
-    def self.get_error_classes
-      classes = constants.map {|c| const_get(c)}
+    def self.get_error_classes(auth=false)
+      if auth
+        classes = Auth.constants.map { |c| Auth.const_get(c) }
+      else
+        classes = constants.map { |c| const_get(c) }
+      end
       classes.select!{|c| c < AbstractRequestError and c != AppleDEPClient::Error::GenericError}
       classes + [AppleDEPClient::Error::GenericError] # Add AbstractRequestError at the end
     end
@@ -31,10 +35,19 @@ module AppleDEPClient
     module Auth
       # Used by AppleDEPClient::Auth
       class BadRequest < AbstractRequestError
+      def self.check_response response
+        response.code == 400
+      end
       end
       class Unauthorized < AbstractRequestError
+      def self.check_response response
+        response.code == 401
+      end
       end
       class Forbidden < AbstractRequestError
+      def self.check_response response
+        response.code == 403
+      end
       end
     end
 

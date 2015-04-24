@@ -12,21 +12,33 @@ describe AppleDEPClient::Error do
     describe AppleDEPClient::Error::Auth::BadRequest do
       subject { AppleDEPClient::Error::Auth::BadRequest }
       specify { expect(subject).to be }
+      it 'can return true for check response' do
+        response = Typhoeus::Response.new(return_code: :ok, response_code: 400, body: '')
+        expect(subject.check_response response).to be_truthy
+      end
     end
     describe AppleDEPClient::Error::Auth::Unauthorized do
       subject { AppleDEPClient::Error::Auth::Unauthorized }
       specify { expect(subject).to be }
+      it 'can return true for check response' do
+        response = Typhoeus::Response.new(return_code: :ok, response_code: 401, body: '')
+        expect(subject.check_response response).to be_truthy
+      end
     end
     describe AppleDEPClient::Error::Auth::Forbidden do
       subject { AppleDEPClient::Error::Auth::Forbidden }
       specify { expect(subject).to be }
+      it 'can return true for check response' do
+        response = Typhoeus::Response.new(return_code: :ok, response_code: 403)
+        expect(subject.check_response response).to be_truthy
+      end
     end
   end
   describe AppleDEPClient::Error::GenericError do
     subject { AppleDEPClient::Error::GenericError }
     specify { expect(subject).to be }
     it 'can return true for check response' do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 500)
+      response = Typhoeus::Response.new(return_code: :ok, response_code: 500, body: '')
       expect(subject.check_response response).to be_truthy
     end
   end
@@ -58,7 +70,7 @@ describe AppleDEPClient::Error do
     subject { AppleDEPClient::Error::MethodNotAllowed }
     specify { expect(subject).to be }
     it 'can return true for check response' do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 405)
+      response = Typhoeus::Response.new(return_code: :ok, response_code: 405, body: '')
       expect(subject.check_response response).to be_truthy
     end
   end
