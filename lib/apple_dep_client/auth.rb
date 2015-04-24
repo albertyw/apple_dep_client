@@ -19,11 +19,8 @@ module AppleDEPClient
       request.options[:headers].merge!({'Authorization' => oauth_header(request)})
       request.run
       response = request.response
-      if response.success?
-        parse_response response
-      else
-        parse_error response
-      end
+      AppleDEPClient::Error.check_request_error(response, auth=true)
+      parse_response response
     end
 
     def self.oauth_header request
@@ -49,19 +46,6 @@ module AppleDEPClient
     def self.parse_response response
       body = JSON.parse response.response_body
       auth_session_token = body['auth_session_token']
-    end
-
-    def self.parse_error response
-      case response.code
-      when 400
-        raise AppleDEPClient::Error::AuthBadRequest.new response.body
-      when 401
-        raise AppleDEPClient::Error::AuthUnauthorized.new response.body
-      when 403
-        raise AppleDEPClient::Error::AuthForbidden.new response.body
-      else
-        raise AppleDEPClient::Error::RequestError.new response.body
-      end
     end
   end
 end
