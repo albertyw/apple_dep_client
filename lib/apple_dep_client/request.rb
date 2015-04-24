@@ -41,7 +41,7 @@ module AppleDEPClient
       elsif response.code == 405
         raise AppleDEPClient::Error::MethodNotAllowed.new response.body
       elsif response.code != 200
-        raise AppleDEPClient::Error::RequestError.new response.body
+        raise AppleDEPClient::Error::GenericError.new response.body
       end
     end
   end

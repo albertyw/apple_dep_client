@@ -55,7 +55,7 @@ describe AppleDEPClient::Request do
     end
     it "can raise an error" do
       response = Typhoeus::Response.new(return_code: :ok, response_code: 500)
-      expect{AppleDEPClient::Request.check_response response}.to raise_error AppleDEPClient::Error::RequestError
+      expect{AppleDEPClient::Request.check_response response}.to raise_error AppleDEPClient::Error::GenericError
     end
   end
 end

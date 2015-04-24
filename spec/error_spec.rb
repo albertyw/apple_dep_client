@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe AppleDEPClient::Error do
-  describe AppleDEPClient::Error::RequestError do
-    subject { AppleDEPClient::Error::RequestError }
+  describe AppleDEPClient::Error::AbstractRequestError do
+    subject { AppleDEPClient::Error::AbstractRequestError }
     let(:body) { 'asdf' }
     it "takes a body" do
       expect { raise subject.new(body) }.to raise_error RuntimeError

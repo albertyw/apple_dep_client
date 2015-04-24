@@ -53,9 +53,9 @@ describe AppleDEPClient::Auth do
       response = Typhoeus::Response.new(return_code: :forbidden, response_code: 403)
       expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::Auth::Forbidden
     end
-    it "can raise RequestError" do
+    it "can raise GenericError" do
       response = Typhoeus::Response.new(return_code: :server_error, response_code: 500)
-      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::RequestError
+      expect{AppleDEPClient::Auth.parse_error response}.to raise_error AppleDEPClient::Error::GenericError
     end
   end
 end

@@ -2,7 +2,9 @@
 
 module AppleDEPClient
   module Error
-    class RequestError < RuntimeError
+    class AbstractRequestError < RuntimeError
+      # Error class that all other errors inherit from
+      # This shouldn't ever be instantiated
       attr_reader :body
       def initialize(body)
         @body = body
@@ -11,36 +13,41 @@ module AppleDEPClient
 
     module Auth
       # Used by AppleDEPClient::Auth
-      class BadRequest < RequestError
+      class BadRequest < AbstractRequestError
       end
-      class Unauthorized < RequestError
+      class Unauthorized < AbstractRequestError
       end
-      class Forbidden < RequestError
+      class Forbidden < AbstractRequestError
       end
+    end
+
+
+    class GenericError < AbstractRequestError
+      # Catch-all error class
     end
 
     # Used by AppleDEPClient::Request
-    class MalformedRequest < RequestError
+    class MalformedRequest < AbstractRequestError
     end
-    class Unauthorized < RequestError
+    class Unauthorized < AbstractRequestError
     end
-    class Forbidden < RequestError
+    class Forbidden < AbstractRequestError
     end
-    class MethodNotAllowed < RequestError
+    class MethodNotAllowed < AbstractRequestError
     end
 
     # Used by AppleDEPClient::Device
-    class InvalidCursor < RequestError
+    class InvalidCursor < AbstractRequestError
     end
-    class ExhaustedCursor < RequestError
+    class ExhaustedCursor < AbstractRequestError
     end
-    class CursorRequired < RequestError
+    class CursorRequired < AbstractRequestError
     end
-    class ExpiredCursor < RequestError
+    class ExpiredCursor < AbstractRequestError
     end
-    class NotFound < RequestError
+    class NotFound < AbstractRequestError
     end
-    class DeviceIDRequired < RequestError
+    class DeviceIDRequired < AbstractRequestError
     end
   end
 end

@@ -60,7 +60,7 @@ module AppleDEPClient
       when 403
         raise AppleDEPClient::Error::Auth::Forbidden.new response.body
       else
-        raise AppleDEPClient::Error::RequestError.new response.body
+        raise AppleDEPClient::Error::GenericError.new response.body
       end
     end
   end
