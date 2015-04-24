@@ -20,18 +20,9 @@ AppleDEPClient.configure do |config|
 end
 # Get S/MIME encrypted Server Token from Apple
 token_data = AppleDEPClient::Token.decode_token(smime_data)
-```
-
-Afterwards, all usage of the `AppleDEPClient` should include:
-
-```ruby
-AppleDEPClient.configure do |config|
-  config.consumer_key = # XXX
-  config.consumer_secret = # XXX
-  config.access_token = # XXX
-  config.access_secret = # XXX
-  config.access_token_expiry = # XXX
-end
+token_data[:consumer_key]
+token_data[:consumer_secret]
+...
 ```
 
 ## Interacting with DEP endpoints
@@ -39,12 +30,17 @@ end
 e.g.
 
 ```ruby
-response = AppleDEPClient.get_account_details()
-response.server_name
-response.server_uuid
-response.facilitator_id
-response.org_name
-response.org_email
-response.org_phone
-response.org_address
+AppleDEPClient.configure do |config|
+  config.consumer_key        = token_data[:consumer_key]        # XXX
+  config.consumer_secret     = token_data[:consumer_secret]     # XXX
+  config.access_token        = token_data[:access_token]        # XXX
+  config.access_secret       = token_data[:access_secret]       # XXX
+  config.access_token_expiry = token_data[:access_token_expiry] # XXX
+end
+
+data = AppleDEPClient::Account.fetch()
+data["server_name"]
+data["server_uuid"]
+data["org_name"]
+...
 ```
