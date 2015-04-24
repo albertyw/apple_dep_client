@@ -18,7 +18,7 @@ module AppleDEPClient
       )
       request.run
       check_response request.response
-      request.response.body
+      JSON.parse request.response.body
     end
 
     def self.make_headers
