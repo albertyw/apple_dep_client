@@ -1,4 +1,5 @@
 require 'apple_dep_client/version'
+require 'apple_dep_client/error'
 require 'apple_dep_client/configuration'
 require 'apple_dep_client/token'
 require 'apple_dep_client/account'
