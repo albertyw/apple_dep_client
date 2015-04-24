@@ -20,4 +20,20 @@ describe AppleDEPClient::Error do
     subject { AppleDEPClient::Error::AuthForbidden }
     specify { expect(subject).to be }
   end
+  describe AppleDEPClient::Error::MalformedRequest do
+    subject { AppleDEPClient::Error::MalformedRequest }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::Unauthorized do
+    subject { AppleDEPClient::Error::Unauthorized }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::Forbidden do
+    subject { AppleDEPClient::Error::Forbidden }
+    specify { expect(subject).to be }
+  end
+  describe AppleDEPClient::Error::MethodNotAllowed do
+    subject { AppleDEPClient::Error::MethodNotAllowed }
+    specify { expect(subject).to be }
+  end
 end

@@ -15,5 +15,15 @@ module AppleDEPClient
     end
     class AuthForbidden < RequestError
     end
+
+    # Used by AppleDEPClient::Request
+    class MalformedRequest < RequestError
+    end
+    class Unauthorized < RequestError
+    end
+    class Forbidden < RequestError
+    end
+    class MethodNotAllowed < RequestError
+    end
   end
 end
