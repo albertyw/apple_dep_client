@@ -32,17 +32,7 @@ module AppleDEPClient
     end
 
     def self.check_response response
-      if response.code == 400 and response.body.strip == 'MALFORMED_REQUEST_BODY'
-        raise AppleDEPClient::Error::MalformedRequest.new response.body
-      elsif response.code == 401 and response.body.strip == 'UNAUTHORIZED'
-        raise AppleDEPClient::Error::Unauthorized.new response.body
-      elsif response.code == 403 and response.body.strip == 'FORBIDDEN'
-        raise AppleDEPClient::Error::Forbidden.new response.body
-      elsif response.code == 405
-        raise AppleDEPClient::Error::MethodNotAllowed.new response.body
-      elsif response.code != 200
-        raise AppleDEPClient::Error::GenericError.new response.body
-      end
+      AppleDEPClient::Error.check_request_error response
     end
   end
 end

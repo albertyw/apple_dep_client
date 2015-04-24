@@ -34,7 +34,7 @@ describe AppleDEPClient::Request do
   end
   describe ".check_response" do
     it "will not raise an error if the response is ok" do
-      response = Typhoeus::Response.new(return_code: :ok, response_code: 200)
+      response = Typhoeus::Response.new(return_code: :ok, response_code: 200, body: '')
       expect{AppleDEPClient::Request.check_response response}.to_not raise_error
     end
     it "can raise a MalformedRequest error" do
