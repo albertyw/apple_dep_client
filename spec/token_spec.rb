@@ -7,14 +7,14 @@ describe "AppleDEPClient::Token" do
       expect(AppleDEPClient::Token).to receive(:create_temp_file).twice.and_call_original
       expect(AppleDEPClient::Token).to receive(:remove_temp_file).twice
       expect(AppleDEPClient::Token).to receive(:run_command).once.and_return '{}'
-      AppleDEPClient::Token.decode_token('sample data', 'sample key')
+      AppleDEPClient::Token.decode_token('sample data')
     end
     it 'will raise an error if the decryption returned no data' do
       expect(AppleDEPClient::Token).to_not receive(:parse_data)
       expect(AppleDEPClient::Token).to receive(:create_temp_file).twice.and_call_original
       expect(AppleDEPClient::Token).to receive(:remove_temp_file).twice
       expect(AppleDEPClient::Token).to receive(:run_command).once.and_return ''
-      expect{AppleDEPClient::Token.decode_token('sample data', 'sample key')}.to raise_error
+      expect{AppleDEPClient::Token.decode_token('sample data')}.to raise_error
     end
   end
 

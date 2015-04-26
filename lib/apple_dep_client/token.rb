@@ -11,14 +11,14 @@ module AppleDEPClient
 
     # Given an S/MIME encrypted Server Token, return a hash of token values
     # From the MDM Protocol information, it seems all tokens are PKCS7-MIME encrypted
-    def self.decode_token(smime_data, private_key)
-      data = decrypt_data(smime_data, private_key)
+    def self.decode_token(smime_data)
+      data = decrypt_data(smime_data)
       parse_data data
     end
 
-    def self.decrypt_data(smime_data, private_key)
+    def self.decrypt_data(smime_data)
       data = create_temp_file('data', smime_data)
-      private_key = create_temp_file('key', private_key)
+      private_key = create_temp_file('key', AppleDEPClient.private_key)
       command = "openssl smime -decrypt -in #{data.path} -inkey #{private_key.path} -text"
       decrypted_data = run_command command
       remove_temp_file data
