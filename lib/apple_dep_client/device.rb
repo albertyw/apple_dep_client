@@ -29,5 +29,17 @@ module AppleDEPClient
       end
       JSON.dump body
     end
+
+    def self.sync
+      raise NotImplementedError
+    end
+
+    def self.details(devices)
+      raise NotImplementedError
+    end
+
+    def self.disown(devices)
+      raise NotImplementedError
+    end
   end
 end
