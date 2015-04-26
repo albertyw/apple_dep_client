@@ -5,7 +5,6 @@
 module AppleDEPClient
   module Configuration
     DEP_CONFIG = [
-      :public_key,          # MDM Server's public key for encrypting token files
       :private_key,         # MDM Server's private key for decrypting token files
       :consumer_key,        # Server Token information
       :consumer_secret,
