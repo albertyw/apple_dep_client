@@ -1,4 +1,5 @@
 # Wrapper around requests to DEP endpoint
+# Will also handle any error conditions
 
 require 'json'
 require 'typhoeus'
