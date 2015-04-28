@@ -2,7 +2,7 @@
 
 module AppleDEPClient
   module Account
-    URL = 'https://mdmenrollment.apple.com/account'
+    URL = "#{AppleDEPClient.apple_dep_server}/account"
     def self.fetch
       AppleDEPClient::Request.make_request(URL, :get, '')
     end

@@ -11,7 +11,7 @@ module AppleDEPClient
     # Apple requires a quirky OAuth 1.0a authentication to get a temporary
     # X-ADM-Auth-Session key to make requests; this takes care of that
 
-    OAUTH_URL = 'https://mdmenrollment.apple.com/session'
+    OAUTH_URL = "#{AppleDEPClient.apple_dep_server}/session"
 
     def self.get_session_token
       options = {method: :get, headers: {}}
