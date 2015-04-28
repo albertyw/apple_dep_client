@@ -4,7 +4,7 @@ require 'json'
 
 module AppleDEPClient
   module Device
-    FETCH_URL = 'https://mdmenrollment.apple.com/server/devices'
+    FETCH_URL = "#{AppleDEPClient.apple_dep_server}/server/devices"
     FETCH_LIMIT = 1000 # must be between 100 and 1000
 
     def self.fetch
