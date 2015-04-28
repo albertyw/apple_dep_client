@@ -4,8 +4,17 @@ require 'json'
 
 module AppleDEPClient
   module Profile
-    def self.define(data)
-      raise NotImplementedError
+    DEFINE_URL = "#{AppleDEPClient.apple_dep_server}/profile"
+
+    PROFILE_KEYS = [:profile_name, :url, :allow_pairing, :is_supervised,
+      :is_mandatory, :is_mdm_removable, :support_phone_number,
+      :support_email_address, :org_magic, :anchor_certs, :supervising_host_certs,
+      :skip_setup_items, :department, :devices]
+
+    def self.define(profile_data)
+      profile_data.select!{|key, value| PROFILE_KEYS.include? key.to_sym}
+      profile_data = JSON.dump profile_data
+      AppleDEPClient::Request.make_request(DEFINE_URL, :post, profile_data)
     end
 
     def self.assign(profile_uuid, devices)
