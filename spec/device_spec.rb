@@ -38,4 +38,13 @@ describe AppleDEPClient::Device do
       expect(JSON.parse(AppleDEPClient::Device.fetch_body nil)).to eq body
     end
   end
+
+  describe ".disown" do
+    it "will make a request to disown devices" do
+      devices = ['asdf']
+      expect(AppleDEPClient::Request).to receive(:make_request).and_return({"devices" => {"asdf"=>"SUCCESS"}})
+      devices = AppleDEPClient::Device.disown devices
+      expect(devices).to eq({"asdf" => "SUCCESS"})
+    end
+  end
 end

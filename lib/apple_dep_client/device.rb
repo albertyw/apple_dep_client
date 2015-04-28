@@ -6,6 +6,7 @@ module AppleDEPClient
   module Device
     FETCH_URL = "#{AppleDEPClient.apple_dep_server}/server/devices"
     FETCH_LIMIT = 1000 # must be between 100 and 1000
+    DISOWN_URL = "#{AppleDEPClient.apple_dep_server}/devices/disown"
 
     def self.fetch
       response = {'cursor'=>nil, 'more_to_follow'=> 'true' }
@@ -38,8 +39,12 @@ module AppleDEPClient
       raise NotImplementedError
     end
 
+    # Accepts an array of device ID strings
     def self.disown(devices)
-      raise NotImplementedError
+      body = {'devices' => devices}
+      body = JSON.dump body
+      response = AppleDEPClient::Request.make_request(DISOWN_URL, :post, body)
+      response['devices']
     end
   end
 end
