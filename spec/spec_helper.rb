@@ -12,6 +12,7 @@ RSpec.configure do |config|
       client.access_token = nil
       client.access_secret = nil
       client.access_token_expiry = nil
+      client.apple_dep_server = nil
     end
   end
 end
