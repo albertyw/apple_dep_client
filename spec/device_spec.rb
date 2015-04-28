@@ -39,6 +39,18 @@ describe AppleDEPClient::Device do
     end
   end
 
+  describe ".sync" do
+    it "isn't finished" do
+      expect{AppleDEPClient::Device.sync}.to raise_error NotImplementedError
+    end
+  end
+
+  describe ".details" do
+    it "isn't finished" do
+      expect{AppleDEPClient::Device.details('asdf')}.to raise_error NotImplementedError
+    end
+  end
+
   describe ".disown" do
     it "will make a request to disown devices" do
       devices = ['asdf']
