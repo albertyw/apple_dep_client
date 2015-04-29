@@ -7,6 +7,7 @@ module AppleDEPClient
     DEFINE_URL = "#{AppleDEPClient.apple_dep_server}/profile"
     ASSIGN_URL = "#{AppleDEPClient.apple_dep_server}/profile/devices"
     FETCH_URL = "#{AppleDEPClient.apple_dep_server}/profile"
+    REMOVE_URL = "#{AppleDEPClient.apple_dep_server}/profile/devices"
 
     PROFILE_KEYS = [:profile_name, :url, :allow_pairing, :is_supervised,
       :is_mandatory, :is_mdm_removable, :support_phone_number,
@@ -31,7 +32,9 @@ module AppleDEPClient
     end
 
     def self.remove(devices)
-      raise NotImplementedError
+      body = {"devices" => devices}
+      body = JSON.dump body
+      AppleDEPClient::Request.make_request(REMOVE_URL, :delete, body)
     end
   end
 end

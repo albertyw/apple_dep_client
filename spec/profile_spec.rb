@@ -25,4 +25,10 @@ describe AppleDEPClient::Profile do
       AppleDEPClient::Profile.fetch('1')
     end
   end
+  describe ".remove" do
+    it "sends a request to remove profiles from devices" do
+      expect(AppleDEPClient::Request).to receive(:make_request).with(AppleDEPClient::Profile::REMOVE_URL, :delete, anything).once
+      AppleDEPClient::Profile.remove('a')
+    end
+  end
 end
