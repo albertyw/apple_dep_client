@@ -46,15 +46,15 @@ module AppleDEPClient
       ["GenericError",        lambda{|response| response.code != 200 }],
     ]
 
-    def self.check_request_error(response, auth=false)
-      get_errors(auth).each do |error_name, error_check|
+    def self.check_request_error(response, auth:false)
+      get_errors(auth:auth).each do |error_name, error_check|
         if error_check.call(response)
           raise RequestError, error_name
         end
       end
     end
 
-    def self.get_errors(auth=false)
+    def self.get_errors(auth:false)
       auth ? AUTH_ERRORS : ERRORS
     end
 

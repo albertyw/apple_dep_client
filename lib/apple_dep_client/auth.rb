@@ -19,7 +19,7 @@ module AppleDEPClient
       request.options[:headers].merge!({'Authorization' => oauth_header(request)})
       request.run
       response = request.response
-      AppleDEPClient::Error.check_request_error(response, auth=true)
+      AppleDEPClient::Error.check_request_error(response, auth:true)
       parse_response response
     end
 

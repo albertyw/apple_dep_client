@@ -18,7 +18,7 @@ describe AppleDEPClient::Request do
       response = Typhoeus::Response.new(return_code: :ok, response_code: 200, body: '{"qwer": 2}')
       Typhoeus.stub('url').and_return response
       expect(AppleDEPClient::Error).to receive(:check_request_error).with(response).once
-      body = AppleDEPClient::Request.make_request('url', 'get', 'asdf', {})
+      body = AppleDEPClient::Request.make_request('url', 'get', 'asdf', headers:{})
       expect(body).to eq({"qwer" => 2})
     end
   end
