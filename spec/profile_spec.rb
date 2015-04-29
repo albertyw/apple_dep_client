@@ -13,4 +13,10 @@ describe AppleDEPClient::Profile do
       AppleDEPClient::Profile.define data
     end
   end
+  describe ".assign" do
+    it "sends a request to assign a profile to data" do
+      expect(AppleDEPClient::Request).to receive(:make_request).with(AppleDEPClient::Profile::ASSIGN_URL, :put, anything).once
+      AppleDEPClient::Profile.assign('1', 'a')
+    end
+  end
 end

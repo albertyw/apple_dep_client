@@ -5,6 +5,7 @@ require 'json'
 module AppleDEPClient
   module Profile
     DEFINE_URL = "#{AppleDEPClient.apple_dep_server}/profile"
+    ASSIGN_URL = "#{AppleDEPClient.apple_dep_server}/profile/devices"
 
     PROFILE_KEYS = [:profile_name, :url, :allow_pairing, :is_supervised,
       :is_mandatory, :is_mdm_removable, :support_phone_number,
@@ -18,7 +19,9 @@ module AppleDEPClient
     end
 
     def self.assign(profile_uuid, devices)
-      raise NotImplementedError
+      body = {"profile_uuid" => profile_uuid, "devices" => devices}
+      body = JSON.dump body
+      AppleDEPClient::Request.make_request(ASSIGN_URL, :put, body)
     end
 
     def self.fetch(profile_uuid)
