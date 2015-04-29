@@ -6,6 +6,7 @@ module AppleDEPClient
   module Profile
     DEFINE_URL = "#{AppleDEPClient.apple_dep_server}/profile"
     ASSIGN_URL = "#{AppleDEPClient.apple_dep_server}/profile/devices"
+    FETCH_URL = "#{AppleDEPClient.apple_dep_server}/profile"
 
     PROFILE_KEYS = [:profile_name, :url, :allow_pairing, :is_supervised,
       :is_mandatory, :is_mdm_removable, :support_phone_number,
@@ -25,7 +26,8 @@ module AppleDEPClient
     end
 
     def self.fetch(profile_uuid)
-      raise NotImplementedError
+      params = {'profile_uuid' => profile_uuid}
+      AppleDEPClient::Request.make_request(FETCH_URL, :get, nil, params:params)
     end
 
     def self.remove(devices)

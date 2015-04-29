@@ -19,4 +19,10 @@ describe AppleDEPClient::Profile do
       AppleDEPClient::Profile.assign('1', 'a')
     end
   end
+  describe ".fetch" do
+    it "sends a request to fetch a profile" do
+      expect(AppleDEPClient::Request).to receive(:make_request).with(AppleDEPClient::Profile::FETCH_URL, :get, nil, params:anything).once
+      AppleDEPClient::Profile.fetch('1')
+    end
+  end
 end
