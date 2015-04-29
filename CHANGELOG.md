@@ -1,3 +1,13 @@
+## 0.3.0 (2015-04-29)
+
+Bugfixes:
+
+ - Updated syntax of positional arguments
+
+Features:
+
+ - Add in functions for interacting with profiles
+
 ## 0.2.1 (2015-04-29)
 
 Features:
