@@ -1,3 +1,9 @@
+## 0.2.1 (2015-04-29)
+
+Features:
+
+ - Simplify error checking
+
 ## 0.2.0 (2015-04-27)
 
 Features:
