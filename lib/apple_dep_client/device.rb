@@ -11,14 +11,14 @@ module AppleDEPClient
     def self.fetch
       response = {'cursor'=>nil, 'more_to_follow'=> 'true' }
       while response['more_to_follow'] == 'true'
-        response = make_request response['cursor']
+        response = make_fetch_request response['cursor']
         response['devices'].each do |device|
           yield device
         end
       end
     end
 
-    def self.make_request cursor
+    def self.make_fetch_request cursor
       body = fetch_body(cursor)
       AppleDEPClient::Request.make_request(FETCH_URL, :post, body)
     end
