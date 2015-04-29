@@ -28,6 +28,20 @@ module AppleDEPClient
       ["NotFound",            lambda{|response| response.code == 200 and response.body.strip == 'NOT_FOUND' }],
       ["DeviceIDRequired",    lambda{|response| response.code == 400 and response.body.strip == 'DEVICE_ID_REQUIRED' }],
 
+      # Used by AppleDEPClient::Profile
+      ["ConfigUrlRequired",   lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_URL_REQUIRED' }],
+      ["ConfigNameRequired",  lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_NAME_REQUIRED' }],
+      ["FlagsInvalid",        lambda{|response| response.code == 400 and response.body.strip == 'FLAGS_INVALID' }],
+      ["ConfigUrlInvalid",    lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_URL_INVALID' }],
+      ["ConfigNameInvalid",   lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_NAME_INVALID' }],
+      ["DepartmentInvalid",   lambda{|response| response.code == 400 and response.body.strip == 'DEPARTMENT_INVALID' }],
+      ["SupportPhoneInvalid", lambda{|response| response.code == 400 and response.body.strip == 'SUPPORT_PHONE_INVALID' }],
+      ["SupportEmailInvalid", lambda{|response| response.code == 400 and response.body.strip == 'SUPPORT_EMAIL_INVALID' }],
+      ["DescriptionInvalid",  lambda{|response| response.code == 400 and response.body.strip == 'DESCRIPTION_INVALID' }],
+      ["MagicInvalid",        lambda{|response| response.code == 400 and response.body.strip == 'MAGIC_INVALID' }],
+      ["ProfileUUIDRequired", lambda{|response| response.code == 400 and response.body.strip == 'PROFILE_UUID_REQUIRED' }],
+      ["ProfileNotFound",     lambda{|response| response.code == 400 and response.body.strip == 'PROFILE_NOT_FOUND' }],
+
       # Catch-all error class
       ["GenericError",        lambda{|response| response.code != 200 }],
     ]
