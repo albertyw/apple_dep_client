@@ -7,7 +7,7 @@ require 'typhoeus'
 module AppleDEPClient
   module Request
 
-    def self.make_request(url, query_type, body, headers:nil)
+    def self.make_request(url, query_type, body, params:nil, headers:nil)
       if headers == nil
         headers = make_headers
       end
@@ -15,7 +15,8 @@ module AppleDEPClient
         url,
         method: query_type,
         body: body,
-        headers: headers
+        params: params,
+        headers: headers,
       )
       request.run
       AppleDEPClient::Error.check_request_error request.response

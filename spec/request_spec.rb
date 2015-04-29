@@ -21,6 +21,13 @@ describe AppleDEPClient::Request do
       body = AppleDEPClient::Request.make_request('url', 'get', 'asdf', headers:{})
       expect(body).to eq({"qwer" => 2})
     end
+    it "can add params to the url" do
+      expect(AppleDEPClient::Request).to receive(:make_headers)
+      response = Typhoeus::Response.new(return_code: :ok, response_code: 200, body: '{"qwer": 2}')
+      Typhoeus.stub('url').and_return response
+      body = AppleDEPClient::Request.make_request('url', 'get', 'asdf', params:{'a'=>'b'})
+      expect(body).to eq({"qwer" => 2})
+    end
   end
   describe ".make_headers" do
     it "will make a hash of headers" do
