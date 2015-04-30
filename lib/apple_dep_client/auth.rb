@@ -14,7 +14,7 @@ module AppleDEPClient
     OAUTH_PATH = "/session"
 
     def self.get_session_token
-      options = {method: :get, headers: {}}
+      options = {method: :get, headers: AppleDEPClient::Request::DEFAULT_HEADERS}
       request = Typhoeus::Request.new(AppleDEPClient::Request.make_url(OAUTH_PATH), options)
       request.options[:headers].merge!({'Authorization' => oauth_header(request)})
       request.run

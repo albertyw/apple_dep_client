@@ -6,6 +6,12 @@ require 'typhoeus'
 
 module AppleDEPClient
   module Request
+    DEFAULT_HEADERS = {
+      'User-Agent' => "CellabusMDM/#{AppleDEPClient::VERSION}",
+      'X-Server-Protocol-Version' => '2',
+      'Content-Type' => 'application/json;charset=UTF8',
+    }
+    DEFAULT_HEADERS.freeze
 
     def self.make_request(url, query_type, body, params:nil, headers:nil)
       if headers == nil
@@ -25,12 +31,7 @@ module AppleDEPClient
 
     def self.make_headers
       session_auth_token = AppleDEPClient::Auth.get_session_token
-      {
-        'User-Agent' => "CellabusMDM/#{AppleDEPClient::VERSION}",
-        'X-Server-Protocol-Version' => '2',
-        'X-ADM-Auth-Session' => session_auth_token,
-        'Content-Type' => 'application/json;charset=UTF8',
-      }
+      DEFAULT_HEADERS.merge({'X-ADM-Auth-Session' => session_auth_token})
     end
 
     def self.make_url path
