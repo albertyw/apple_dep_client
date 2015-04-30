@@ -1,3 +1,9 @@
+## 0.3.1 (2015-04-30)
+
+Bugfixes:
+
+ - Fix urls not respecting updates to the apple_dep_server config value
+
 ## 0.3.0 (2015-04-29)
 
 Bugfixes:
