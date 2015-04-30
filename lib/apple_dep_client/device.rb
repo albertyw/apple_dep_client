@@ -4,9 +4,9 @@ require 'json'
 
 module AppleDEPClient
   module Device
-    FETCH_URL = "#{AppleDEPClient.apple_dep_server}/server/devices"
+    FETCH_PATH = "/server/devices"
     FETCH_LIMIT = 1000 # must be between 100 and 1000
-    DISOWN_URL = "#{AppleDEPClient.apple_dep_server}/devices/disown"
+    DISOWN_PATH = "/devices/disown"
 
     def self.fetch
       response = {'cursor'=>nil, 'more_to_follow'=> 'true' }
@@ -20,7 +20,7 @@ module AppleDEPClient
 
     def self.make_fetch_request cursor
       body = fetch_body(cursor)
-      AppleDEPClient::Request.make_request(FETCH_URL, :post, body)
+      AppleDEPClient::Request.make_request(AppleDEPClient::Request.make_url(FETCH_PATH), :post, body)
     end
 
     def self.fetch_body cursor
@@ -43,7 +43,7 @@ module AppleDEPClient
     def self.disown(devices)
       body = {'devices' => devices}
       body = JSON.dump body
-      response = AppleDEPClient::Request.make_request(DISOWN_URL, :post, body)
+      response = AppleDEPClient::Request.make_request(AppleDEPClient::Request.make_url(DISOWN_PATH), :post, body)
       response['devices']
     end
   end

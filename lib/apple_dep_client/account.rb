@@ -2,9 +2,9 @@
 
 module AppleDEPClient
   module Account
-    URL = "#{AppleDEPClient.apple_dep_server}/account"
+    FETCH_PATH = "/account"
     def self.fetch
-      AppleDEPClient::Request.make_request(URL, :get, '')
+      AppleDEPClient::Request.make_request(AppleDEPClient::Request.make_url(FETCH_PATH), :get, '')
     end
   end
 end

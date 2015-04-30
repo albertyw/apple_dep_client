@@ -11,11 +11,11 @@ module AppleDEPClient
     # Apple requires a quirky OAuth 1.0a authentication to get a temporary
     # X-ADM-Auth-Session key to make requests; this takes care of that
 
-    OAUTH_URL = "#{AppleDEPClient.apple_dep_server}/session"
+    OAUTH_PATH = "/session"
 
     def self.get_session_token
       options = {method: :get, headers: {}}
-      request = Typhoeus::Request.new(OAUTH_URL, options)
+      request = Typhoeus::Request.new(AppleDEPClient::Request.make_url(OAUTH_PATH), options)
       request.options[:headers].merge!({'Authorization' => oauth_header(request)})
       request.run
       response = request.response
@@ -27,7 +27,7 @@ module AppleDEPClient
       consumer = OAuth::Consumer.new(
         AppleDEPClient.consumer_key,
         AppleDEPClient.consumer_secret,
-        site: OAUTH_URL
+        site: AppleDEPClient::Request.make_url(OAUTH_PATH),
       )
       token = OAuth::AccessToken.new(
         consumer,
@@ -39,7 +39,7 @@ module AppleDEPClient
         realm: 'ADM',
         token: token,
       }
-      oauth_helper = OAuth::Client::Helper.new request, oauth_params.merge(request_uri: OAUTH_URL)
+      oauth_helper = OAuth::Client::Helper.new request, oauth_params.merge(request_uri: AppleDEPClient::Request.make_url(OAUTH_PATH))
       oauth_helper.header
     end
 

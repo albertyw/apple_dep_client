@@ -23,7 +23,8 @@ describe AppleDEPClient::Device do
   describe ".make_fetch_request" do
     it "will make a request" do
       expect(AppleDEPClient::Device).to receive(:fetch_body).with('cursor').and_return 'body'
-      expect(AppleDEPClient::Request).to receive(:make_request).with(AppleDEPClient::Device::FETCH_URL, :post, 'body').and_return('response').once
+      url = AppleDEPClient::Request.make_url(AppleDEPClient::Device::FETCH_PATH)
+      expect(AppleDEPClient::Request).to receive(:make_request).with(url, :post, 'body').and_return('response').once
       expect(AppleDEPClient::Device.make_fetch_request 'cursor').to eq 'response'
     end
   end

@@ -11,6 +11,7 @@ module AppleDEPClient
       if headers == nil
         headers = make_headers
       end
+      p url
       request = Typhoeus::Request.new(
         url,
         method: query_type,
@@ -31,6 +32,10 @@ module AppleDEPClient
         'X-ADM-Auth-Session' => session_auth_token,
         'Content-Type' => 'application/json;charset=UTF8',
       }
+    end
+
+    def self.make_url path
+      AppleDEPClient.apple_dep_server + path
     end
   end
 end

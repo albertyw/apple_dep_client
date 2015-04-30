@@ -39,4 +39,11 @@ describe AppleDEPClient::Request do
       expect(headers['Content-Type']).to eq 'application/json;charset=UTF8'
     end
   end
+
+  describe ".make_url" do
+    it "will make a url from the config and a path" do
+      AppleDEPClient.apple_dep_server = 'qwer'
+      expect(AppleDEPClient::Request.make_url('asdf')).to eq 'qwerasdf'
+    end
+  end
 end
