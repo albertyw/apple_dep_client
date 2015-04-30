@@ -11,7 +11,6 @@ module AppleDEPClient
       if headers == nil
         headers = make_headers
       end
-      p url
       request = Typhoeus::Request.new(
         url,
         method: query_type,
