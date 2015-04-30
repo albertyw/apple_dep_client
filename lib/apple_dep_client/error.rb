@@ -15,32 +15,32 @@ module AppleDEPClient
 
     ERRORS = [
       # Used by AppleDEPClient::Request
-      ["MalformedRequest",    lambda{|response| response.code == 400 and response.body.strip == 'MALFORMED_REQUEST_BODY'}],
-      ["Unauthorized",        lambda{|response| response.code == 401 and response.body.strip == 'UNAUTHORIZED' }],
-      ["Forbidden",           lambda{|response| response.code == 403 and response.body.strip == 'FORBIDDEN' }],
+      ["MalformedRequest",    lambda{|response| response.code == 400 and response.body.include? 'MALFORMED_REQUEST_BODY'}],
+      ["Unauthorized",        lambda{|response| response.code == 401 and response.body.include? 'UNAUTHORIZED' }],
+      ["Forbidden",           lambda{|response| response.code == 403 and response.body.include? 'FORBIDDEN' }],
       ["MethodNotAllowed",    lambda{|response| response.code == 405 }],
 
       # Used by AppleDEPClient::Device
-      ["InvalidCursor",       lambda{|response| response.code == 400 and response.body.strip == 'INVALID_CURSOR' }],
-      ["ExhaustedCursor",     lambda{|response| response.code == 400 and response.body.strip == 'EXHAUSTED_CURSOR' }],
-      ["CursorRequired",      lambda{|response| response.code == 400 and response.body.strip == 'CURSOR_REQUIRED' }],
-      ["ExpiredCursor",       lambda{|response| response.code == 400 and response.body.strip == 'EXPIRED_CURSOR' }],
-      ["NotFound",            lambda{|response| response.code == 200 and response.body.strip == 'NOT_FOUND' }],
-      ["DeviceIDRequired",    lambda{|response| response.code == 400 and response.body.strip == 'DEVICE_ID_REQUIRED' }],
+      ["InvalidCursor",       lambda{|response| response.code == 400 and response.body.include? 'INVALID_CURSOR' }],
+      ["ExhaustedCursor",     lambda{|response| response.code == 400 and response.body.include? 'EXHAUSTED_CURSOR' }],
+      ["CursorRequired",      lambda{|response| response.code == 400 and response.body.include? 'CURSOR_REQUIRED' }],
+      ["ExpiredCursor",       lambda{|response| response.code == 400 and response.body.include? 'EXPIRED_CURSOR' }],
+      ["NotFound",            lambda{|response| response.code == 200 and response.body.include? 'NOT_FOUND' }],
+      ["DeviceIDRequired",    lambda{|response| response.code == 400 and response.body.include? 'DEVICE_ID_REQUIRED' }],
 
       # Used by AppleDEPClient::Profile
-      ["ConfigUrlRequired",   lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_URL_REQUIRED' }],
-      ["ConfigNameRequired",  lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_NAME_REQUIRED' }],
-      ["FlagsInvalid",        lambda{|response| response.code == 400 and response.body.strip == 'FLAGS_INVALID' }],
-      ["ConfigUrlInvalid",    lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_URL_INVALID' }],
-      ["ConfigNameInvalid",   lambda{|response| response.code == 400 and response.body.strip == 'CONFIG_NAME_INVALID' }],
-      ["DepartmentInvalid",   lambda{|response| response.code == 400 and response.body.strip == 'DEPARTMENT_INVALID' }],
-      ["SupportPhoneInvalid", lambda{|response| response.code == 400 and response.body.strip == 'SUPPORT_PHONE_INVALID' }],
-      ["SupportEmailInvalid", lambda{|response| response.code == 400 and response.body.strip == 'SUPPORT_EMAIL_INVALID' }],
-      ["DescriptionInvalid",  lambda{|response| response.code == 400 and response.body.strip == 'DESCRIPTION_INVALID' }],
-      ["MagicInvalid",        lambda{|response| response.code == 400 and response.body.strip == 'MAGIC_INVALID' }],
-      ["ProfileUUIDRequired", lambda{|response| response.code == 400 and response.body.strip == 'PROFILE_UUID_REQUIRED' }],
-      ["ProfileNotFound",     lambda{|response| response.code == 400 and response.body.strip == 'PROFILE_NOT_FOUND' }],
+      ["ConfigUrlRequired",   lambda{|response| response.code == 400 and response.body.include? 'CONFIG_URL_REQUIRED' }],
+      ["ConfigNameRequired",  lambda{|response| response.code == 400 and response.body.include? 'CONFIG_NAME_REQUIRED' }],
+      ["FlagsInvalid",        lambda{|response| response.code == 400 and response.body.include? 'FLAGS_INVALID' }],
+      ["ConfigUrlInvalid",    lambda{|response| response.code == 400 and response.body.include? 'CONFIG_URL_INVALID' }],
+      ["ConfigNameInvalid",   lambda{|response| response.code == 400 and response.body.include? 'CONFIG_NAME_INVALID' }],
+      ["DepartmentInvalid",   lambda{|response| response.code == 400 and response.body.include? 'DEPARTMENT_INVALID' }],
+      ["SupportPhoneInvalid", lambda{|response| response.code == 400 and response.body.include? 'SUPPORT_PHONE_INVALID' }],
+      ["SupportEmailInvalid", lambda{|response| response.code == 400 and response.body.include? 'SUPPORT_EMAIL_INVALID' }],
+      ["DescriptionInvalid",  lambda{|response| response.code == 400 and response.body.include? 'DESCRIPTION_INVALID' }],
+      ["MagicInvalid",        lambda{|response| response.code == 400 and response.body.include? 'MAGIC_INVALID' }],
+      ["ProfileUUIDRequired", lambda{|response| response.code == 400 and response.body.include? 'PROFILE_UUID_REQUIRED' }],
+      ["ProfileNotFound",     lambda{|response| response.code == 400 and response.body.include? 'PROFILE_NOT_FOUND' }],
 
       # Catch-all error class
       ["GenericError",        lambda{|response| response.code != 200 }],
