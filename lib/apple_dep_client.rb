@@ -8,6 +8,7 @@ end
 
 require 'apple_dep_client/token'
 require 'apple_dep_client/auth'
+require 'apple_dep_client/callback'
 
 require 'apple_dep_client/request'
 require 'apple_dep_client/account'
