@@ -52,3 +52,16 @@ data["server_uuid"]
 data["org_name"]
 ...
 ```
+
+## Device Callbacks
+
+After assigning a DEP profile to a device, the device will hit the `url` in the profile.
+The returned data will be "encoded as a XML plist and then CMS-signed and DER-encoded"
+and can be parsed as below:
+
+``ruby
+data = AppleDEPClient::Callback.decode_callback(request_body)
+data["UDID"]
+data["SERIAL"]
+...
+```
