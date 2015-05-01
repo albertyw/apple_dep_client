@@ -4,6 +4,10 @@
 
 This gem allows for easy interaction with the Apple DEP API.
 
+## Installation
+Read this gem from Github.  Since it's a private repository, you may want to
+refer to http://stackoverflow.com/a/13261333.
+
 ## Usage
 
 See Apple's `Mobile Device Management Protocol Reference` for more information
