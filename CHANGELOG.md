@@ -1,3 +1,9 @@
+## 0.4.0 (2015-05-01)
+
+Features:
+
+ - Add ability to parse device callbacks from signed plist into ruby hash
+
 ## 0.3.1 (2015-04-30)
 
 Bugfixes:
