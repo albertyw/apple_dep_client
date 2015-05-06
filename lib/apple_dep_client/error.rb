@@ -44,9 +44,10 @@ module AppleDEPClient
       get_errors(auth:auth).each do |error_name, response_code, body|
         if response.code == response_code && response.body.include?(body)
           raise RequestError, error_name
-        elsif response.code != 200
-          raise RequestError, 'GenericError'
         end
+      end
+      if response.code != 200
+        raise RequestError, 'GenericError'
       end
     end
 
