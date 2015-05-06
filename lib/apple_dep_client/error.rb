@@ -8,9 +8,6 @@ module AppleDEPClient
       ["BadRequest",          lambda{|response| response.code == 400 }],
       ["Unauthorized",        lambda{|response| response.code == 401 }],
       ["Forbidden",           lambda{|response| response.code == 403 }],
-
-      # Catch-all error class
-      ["GenericError",        lambda{|response| response.code != 200 }],
     ]
 
     ERRORS = [
@@ -41,15 +38,14 @@ module AppleDEPClient
       ["MagicInvalid",        lambda{|response| response.code == 400 and response.body.include? 'MAGIC_INVALID' }],
       ["ProfileUUIDRequired", lambda{|response| response.code == 400 and response.body.include? 'PROFILE_UUID_REQUIRED' }],
       ["ProfileNotFound",     lambda{|response| response.code == 400 and response.body.include? 'PROFILE_NOT_FOUND' }],
-
-      # Catch-all error class
-      ["GenericError",        lambda{|response| response.code != 200 }],
     ]
 
     def self.check_request_error(response, auth:false)
       get_errors(auth:auth).each do |error_name, error_check|
         if error_check.call(response)
           raise RequestError, error_name
+        elsif response.code != 200
+          raise RequestError, 'GenericError'
         end
       end
     end
