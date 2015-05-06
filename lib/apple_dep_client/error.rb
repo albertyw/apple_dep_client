@@ -5,51 +5,47 @@ module AppleDEPClient
 
     AUTH_ERRORS = [
       # Used by AppleDEPClient::Auth
-      ["BadRequest",          lambda{|response| response.code == 400 }],
-      ["Unauthorized",        lambda{|response| response.code == 401 }],
-      ["Forbidden",           lambda{|response| response.code == 403 }],
-
-      # Catch-all error class
-      ["GenericError",        lambda{|response| response.code != 200 }],
+      ["BadRequest",          400, '' ],
+      ["Unauthorized",        401, '' ],
+      ["Forbidden",           403, '' ],
     ]
 
     ERRORS = [
       # Used by AppleDEPClient::Request
-      ["MalformedRequest",    lambda{|response| response.code == 400 and response.body.include? 'MALFORMED_REQUEST_BODY'}],
-      ["Unauthorized",        lambda{|response| response.code == 401 and response.body.include? 'UNAUTHORIZED' }],
-      ["Forbidden",           lambda{|response| response.code == 403 and response.body.include? 'FORBIDDEN' }],
-      ["MethodNotAllowed",    lambda{|response| response.code == 405 }],
+      ["MalformedRequest",    400, 'MALFORMED_REQUEST_BODY' ],
+      ["Unauthorized",        401, 'UNAUTHORIZED' ],
+      ["Forbidden",           403, 'FORBIDDEN' ],
+      ["MethodNotAllowed",    405, '' ],
 
       # Used by AppleDEPClient::Device
-      ["InvalidCursor",       lambda{|response| response.code == 400 and response.body.include? 'INVALID_CURSOR' }],
-      ["ExhaustedCursor",     lambda{|response| response.code == 400 and response.body.include? 'EXHAUSTED_CURSOR' }],
-      ["CursorRequired",      lambda{|response| response.code == 400 and response.body.include? 'CURSOR_REQUIRED' }],
-      ["ExpiredCursor",       lambda{|response| response.code == 400 and response.body.include? 'EXPIRED_CURSOR' }],
-      ["NotFound",            lambda{|response| response.code == 200 and response.body.include? 'NOT_FOUND' }],
-      ["DeviceIDRequired",    lambda{|response| response.code == 400 and response.body.include? 'DEVICE_ID_REQUIRED' }],
+      ["InvalidCursor",       400, 'INVALID_CURSOR' ],
+      ["ExhaustedCursor",     400, 'EXHAUSTED_CURSOR' ],
+      ["CursorRequired",      400, 'CURSOR_REQUIRED' ],
+      ["ExpiredCursor",       400, 'EXPIRED_CURSOR' ],
+      ["NotFound",            200, 'NOT_FOUND' ],
+      ["DeviceIDRequired",    400, 'DEVICE_ID_REQUIRED' ],
 
       # Used by AppleDEPClient::Profile
-      ["ConfigUrlRequired",   lambda{|response| response.code == 400 and response.body.include? 'CONFIG_URL_REQUIRED' }],
-      ["ConfigNameRequired",  lambda{|response| response.code == 400 and response.body.include? 'CONFIG_NAME_REQUIRED' }],
-      ["FlagsInvalid",        lambda{|response| response.code == 400 and response.body.include? 'FLAGS_INVALID' }],
-      ["ConfigUrlInvalid",    lambda{|response| response.code == 400 and response.body.include? 'CONFIG_URL_INVALID' }],
-      ["ConfigNameInvalid",   lambda{|response| response.code == 400 and response.body.include? 'CONFIG_NAME_INVALID' }],
-      ["DepartmentInvalid",   lambda{|response| response.code == 400 and response.body.include? 'DEPARTMENT_INVALID' }],
-      ["SupportPhoneInvalid", lambda{|response| response.code == 400 and response.body.include? 'SUPPORT_PHONE_INVALID' }],
-      ["SupportEmailInvalid", lambda{|response| response.code == 400 and response.body.include? 'SUPPORT_EMAIL_INVALID' }],
-      ["DescriptionInvalid",  lambda{|response| response.code == 400 and response.body.include? 'DESCRIPTION_INVALID' }],
-      ["MagicInvalid",        lambda{|response| response.code == 400 and response.body.include? 'MAGIC_INVALID' }],
-      ["ProfileUUIDRequired", lambda{|response| response.code == 400 and response.body.include? 'PROFILE_UUID_REQUIRED' }],
-      ["ProfileNotFound",     lambda{|response| response.code == 400 and response.body.include? 'PROFILE_NOT_FOUND' }],
-
-      # Catch-all error class
-      ["GenericError",        lambda{|response| response.code != 200 }],
+      ["ConfigUrlRequired",   400, 'CONFIG_URL_REQUIRED' ],
+      ["ConfigNameRequired",  400, 'CONFIG_NAME_REQUIRED' ],
+      ["FlagsInvalid",        400, 'FLAGS_INVALID' ],
+      ["ConfigUrlInvalid",    400, 'CONFIG_URL_INVALID' ],
+      ["ConfigNameInvalid",   400, 'CONFIG_NAME_INVALID' ],
+      ["DepartmentInvalid",   400, 'DEPARTMENT_INVALID' ],
+      ["SupportPhoneInvalid", 400, 'SUPPORT_PHONE_INVALID' ],
+      ["SupportEmailInvalid", 400, 'SUPPORT_EMAIL_INVALID' ],
+      ["DescriptionInvalid",  400, 'DESCRIPTION_INVALID' ],
+      ["MagicInvalid",        400, 'MAGIC_INVALID' ],
+      ["ProfileUUIDRequired", 400, 'PROFILE_UUID_REQUIRED' ],
+      ["ProfileNotFound",     400, 'PROFILE_NOT_FOUND' ],
     ]
 
     def self.check_request_error(response, auth:false)
-      get_errors(auth:auth).each do |error_name, error_check|
-        if error_check.call(response)
+      get_errors(auth:auth).each do |error_name, response_code, body|
+        if response.code == response_code && response.body.include?(body)
           raise RequestError, error_name
+        elsif response.code != 200
+          raise RequestError, 'GenericError'
         end
       end
     end
