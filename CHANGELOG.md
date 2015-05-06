@@ -1,3 +1,9 @@
+## 0.4.1 (2015-05-05)
+
+Features:
+
+ - More documentation and code clearnup
+
 ## 0.4.0 (2015-05-01)
 
 Features:
