@@ -18,6 +18,14 @@ describe "AppleDEPClient::Token" do
     end
   end
 
+  describe ".run_command" do
+    it "can run a command" do
+      command = 'ls'
+      data = AppleDEPClient::Token.run_command command
+      expect(data).to_not be_empty
+    end
+  end
+
   describe ".parse_data" do
     let(:data) { "-----BEGIN MESSAGE-----\n{\"consumer_key\": \"asdf\"}\n-----END MESSAGE-----" }
     it 'can parse JSON data and return it' do
