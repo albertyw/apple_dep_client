@@ -2,21 +2,32 @@ require 'spec_helper'
 
 describe AppleDEPClient::Device do
   describe ".fetch" do
+    before do
+      @url = AppleDEPClient::Device::FETCH_PATH
+    end
     it "will iterate through data to yield devices" do
       response = {'cursor' => 'asdf', 'devices' => ['qwer', 'zxcv'], 'more_to_follow' => 'false'}
-      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with(nil).and_return(response).once
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with(nil, @url).and_return(response).once
       devices = []
       AppleDEPClient::Device.fetch{|x| devices << x }
       expect(devices).to eq ['qwer', 'zxcv']
     end
     it "will iterate through multiple responses" do
       response = {'cursor' => '1', 'devices' => ['qwer'], 'more_to_follow' => 'true'}
-      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with(nil).and_return(response).once
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with(nil, @url).and_return(response).once
       response = {'cursor' => '2', 'devices' => ['zxcv'], 'more_to_follow' => 'false'}
-      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1').and_return(response).once
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1', @url).and_return(response).once
       devices = []
       AppleDEPClient::Device.fetch{|x| devices << x }
       expect(devices).to eq ['qwer', 'zxcv']
+    end
+    it "will return the last cursor" do
+      response = {'cursor' => '1', 'devices' => ['qwer'], 'more_to_follow' => 'true'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with(nil, @url).and_return(response).once
+      response = {'cursor' => '2', 'devices' => ['zxcv'], 'more_to_follow' => 'false'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1', @url).and_return(response).once
+      cursor = AppleDEPClient::Device.fetch{}
+      expect(cursor).to eq '2'
     end
   end
 
@@ -25,7 +36,7 @@ describe AppleDEPClient::Device do
       expect(AppleDEPClient::Device).to receive(:fetch_body).with('cursor').and_return 'body'
       url = AppleDEPClient::Request.make_url(AppleDEPClient::Device::FETCH_PATH)
       expect(AppleDEPClient::Request).to receive(:make_request).with(url, :post, 'body').and_return('response').once
-      expect(AppleDEPClient::Device.make_fetch_request 'cursor').to eq 'response'
+      expect(AppleDEPClient::Device.make_fetch_request 'cursor', AppleDEPClient::Device::FETCH_PATH).to eq 'response'
     end
   end
 
@@ -41,8 +52,21 @@ describe AppleDEPClient::Device do
   end
 
   describe ".sync" do
-    it "isn't finished" do
-      expect{AppleDEPClient::Device.sync}.to raise_error NotImplementedError
+    before do
+      @url = AppleDEPClient::Device::SYNC_PATH
+    end
+    it "will use a cursor and return results" do
+      response = {'cursor' => '2', 'devices'=>['zxcv'], 'more_to_follow' => 'false'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1', @url).and_return(response).once
+      devices = []
+      AppleDEPClient::Device.sync('1'){|x| devices << x }
+      expect(devices).to eq ['zxcv']
+    end
+    it "will return a new cursor" do
+      response = {'cursor' => '2', 'devices'=>['zxcv'], 'more_to_follow' => 'false'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1', @url).and_return(response).once
+      cursor = AppleDEPClient::Device.sync('1'){}
+      expect(cursor).to eq '2'
     end
   end
 

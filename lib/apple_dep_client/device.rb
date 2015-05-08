@@ -6,22 +6,25 @@ module AppleDEPClient
   module Device
     FETCH_PATH = "/server/devices"
     FETCH_LIMIT = 1000 # must be between 100 and 1000
-    DISOWN_PATH = "/devices/disown"
+    SYNC_PATH = "/devices/sync"
     DETAILS_PATH = "/devices/details"
+    DISOWN_PATH = "/devices/disown"
 
-    def self.fetch
-      response = {'cursor'=>nil, 'more_to_follow'=> 'true' }
+    def self.fetch(cursor: nil, url: nil)
+      url ||= FETCH_PATH
+      response = {'cursor'=>cursor, 'more_to_follow'=> 'true' }
       while response['more_to_follow'] == 'true'
-        response = make_fetch_request response['cursor']
+        response = make_fetch_request response['cursor'], url
         response['devices'].each do |device|
           yield device
         end
       end
+      return response['cursor']
     end
 
-    def self.make_fetch_request cursor
+    def self.make_fetch_request cursor, url
       body = fetch_body(cursor)
-      AppleDEPClient::Request.make_request(AppleDEPClient::Request.make_url(FETCH_PATH), :post, body)
+      AppleDEPClient::Request.make_request(AppleDEPClient::Request.make_url(url), :post, body)
     end
 
     def self.fetch_body cursor
@@ -32,8 +35,8 @@ module AppleDEPClient
       JSON.dump body
     end
 
-    def self.sync
-      raise NotImplementedError
+    def self.sync(cursor, &block)
+      self.fetch(cursor:cursor, url: SYNC_PATH, &block)
     end
 
     def self.details(devices)
