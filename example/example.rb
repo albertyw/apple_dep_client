@@ -14,6 +14,7 @@ AppleDEPClient.configure do |x|
 end
 
 device_serials = []
+p 'Devices:'
 AppleDEPClient::Device.fetch do |device|
   p device
   device_serials << device['serial_number']
@@ -34,6 +35,9 @@ DEFAULT_DEP_PROFILE_DATA = {
 
 profile = AppleDEPClient::Profile.define(DEFAULT_DEP_PROFILE_DATA)
 profile_uuid = profile['profile_uuid']
+p 'Profile UUID:'
 p profile_uuid
+p 'Assigning profile to devices:'
 p AppleDEPClient::Profile.assign(profile_uuid, device_serials)
+p 'Fetching profile info:'
 p AppleDEPClient::Profile.fetch(profile_uuid)
