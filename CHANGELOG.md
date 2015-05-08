@@ -1,3 +1,9 @@
+## 1.0.0 (2015-05-07)
+
+Features:
+
+ - Add device sync function
+
 ## 0.4.2 (2015-05-07)
 
 Features:
