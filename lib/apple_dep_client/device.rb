@@ -7,6 +7,7 @@ module AppleDEPClient
     FETCH_PATH = "/server/devices"
     FETCH_LIMIT = 1000 # must be between 100 and 1000
     DISOWN_PATH = "/devices/disown"
+    DETAILS_PATH = "/devices/details"
 
     def self.fetch
       response = {'cursor'=>nil, 'more_to_follow'=> 'true' }
@@ -36,7 +37,10 @@ module AppleDEPClient
     end
 
     def self.details(devices)
-      raise NotImplementedError
+      body = devices
+      body = JSON.dump body
+      response = AppleDEPClient::Request.make_request(AppleDEPClient::Request.make_url(DETAILS_PATH), :post, body)
+      response['devices']
     end
 
     # Accepts an array of device ID strings

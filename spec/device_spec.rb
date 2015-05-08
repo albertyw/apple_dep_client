@@ -47,8 +47,11 @@ describe AppleDEPClient::Device do
   end
 
   describe ".details" do
-    it "isn't finished" do
-      expect{AppleDEPClient::Device.details('asdf')}.to raise_error NotImplementedError
+    it "will return details of devices" do
+      devices = ['asdf']
+      expect(AppleDEPClient::Request).to receive(:make_request).and_return({"devices" => {"asdf"=>"data"}})
+      devices = AppleDEPClient::Device.details devices
+      expect(devices).to eq({"asdf" => "data"})
     end
   end
 
