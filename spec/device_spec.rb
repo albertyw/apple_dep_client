@@ -52,8 +52,21 @@ describe AppleDEPClient::Device do
   end
 
   describe ".sync" do
-    it "isn't finished" do
-      expect{AppleDEPClient::Device.sync}.to raise_error NotImplementedError
+    before do
+      @url = AppleDEPClient::Device::SYNC_PATH
+    end
+    it "will use a cursor and return results" do
+      response = {'cursor' => '2', 'devices'=>['zxcv'], 'more_to_follow' => 'false'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1', @url).and_return(response).once
+      devices = []
+      AppleDEPClient::Device.sync('1'){|x| devices << x }
+      expect(devices).to eq ['zxcv']
+    end
+    it "will return a new cursor" do
+      response = {'cursor' => '2', 'devices'=>['zxcv'], 'more_to_follow' => 'false'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1', @url).and_return(response).once
+      cursor = AppleDEPClient::Device.sync('1'){}
+      expect(cursor).to eq '2'
     end
   end
 

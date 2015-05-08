@@ -6,6 +6,7 @@ module AppleDEPClient
   module Device
     FETCH_PATH = "/server/devices"
     FETCH_LIMIT = 1000 # must be between 100 and 1000
+    SYNC_PATH = "/devices/sync"
     DETAILS_PATH = "/devices/details"
     DISOWN_PATH = "/devices/disown"
 
@@ -34,8 +35,8 @@ module AppleDEPClient
       JSON.dump body
     end
 
-    def self.sync
-      raise NotImplementedError
+    def self.sync(cursor, &block)
+      self.fetch(cursor:cursor, url: SYNC_PATH, &block)
     end
 
     def self.details(devices)
