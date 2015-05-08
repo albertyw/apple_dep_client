@@ -1,3 +1,10 @@
+## 0.4.2 (2015-05-07)
+
+Features:
+
+ - Add example code
+ - Add ability to query for device information
+
 ## 0.4.1 (2015-05-05)
 
 Features:
