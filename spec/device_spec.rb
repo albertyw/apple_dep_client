@@ -18,6 +18,14 @@ describe AppleDEPClient::Device do
       AppleDEPClient::Device.fetch{|x| devices << x }
       expect(devices).to eq ['qwer', 'zxcv']
     end
+    it "will return the last cursor" do
+      response = {'cursor' => '1', 'devices' => ['qwer'], 'more_to_follow' => 'true'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with(nil).and_return(response).once
+      response = {'cursor' => '2', 'devices' => ['zxcv'], 'more_to_follow' => 'false'}
+      expect(AppleDEPClient::Device).to receive(:make_fetch_request).with('1').and_return(response).once
+      cursor = AppleDEPClient::Device.fetch{}
+      expect(cursor).to eq '2'
+    end
   end
 
   describe ".make_fetch_request" do

@@ -17,6 +17,7 @@ module AppleDEPClient
           yield device
         end
       end
+      return response['cursor']
     end
 
     def self.make_fetch_request cursor
