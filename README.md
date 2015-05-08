@@ -67,3 +67,10 @@ data["UDID"]
 data["SERIAL"]
 ...
 ```
+
+## Depsim
+
+There is an example script at `example/example.rb` which can be run against
+Apple's DEP simulator.  You'll need to download the simulator binary and
+run it by `path/to/depsim start -p 80 example/depsim_config.json`.  You can
+then run the script using `bundle exec ruby example/example.rb`.
