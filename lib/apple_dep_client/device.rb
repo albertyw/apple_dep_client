@@ -47,6 +47,8 @@ module AppleDEPClient
     end
 
     # Accepts an array of device ID strings
+    # WARNING - this will remove devices from DEP accounts and
+    # may render devices permanently inoperable
     def self.disown(devices)
       body = {'devices' => devices}
       body = JSON.dump body
