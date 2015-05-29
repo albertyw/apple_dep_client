@@ -12,6 +12,7 @@ module AppleDEPClient
       access_secret: nil,
       access_token_expiry: nil,
       apple_dep_server: 'https://mdmenrollment.apple.com', # Domain that Apple's DEP servers are at
+      user_agent: 'CellabusMDM',
     }
 
     DEP_CONFIG.freeze

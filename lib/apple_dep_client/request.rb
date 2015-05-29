@@ -7,7 +7,7 @@ require 'typhoeus'
 module AppleDEPClient
   module Request
     DEFAULT_HEADERS = {
-      'User-Agent' => "CellabusMDM/#{AppleDEPClient::VERSION}",
+      'User-Agent' => "#{AppleDEPClient.user_agent}/#{AppleDEPClient::VERSION}",
       'X-Server-Protocol-Version' => '2',
       'Content-Type' => 'application/json;charset=UTF8',
     }
