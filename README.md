@@ -1,6 +1,7 @@
 # Apple Device Enrollment Program Client
 
 [ ![Codeship Status for cellabus/apple_dep_client](https://codeship.com/projects/c0524f60-c7a7-0132-b06e-4a390261e3f5/status?branch=master)](https://codeship.com/projects/74982)
+[![Dependency Status](https://gemnasium.com/df107f4e9f06f63f6e4f56c3565c0717.svg)](https://gemnasium.com/cellabus/apple_dep_client)
 [![Code Climate](https://codeclimate.com/repos/554866aee30ba0688c0138df/badges/a40843b11a586c566c43/gpa.svg)](https://codeclimate.com/repos/554866aee30ba0688c0138df/feed)
 [![Test Coverage](https://codeclimate.com/repos/554866aee30ba0688c0138df/badges/a40843b11a586c566c43/coverage.svg)](https://codeclimate.com/repos/554866aee30ba0688c0138df/coverage)
 
