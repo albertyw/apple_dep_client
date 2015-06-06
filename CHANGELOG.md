@@ -1,3 +1,9 @@
+## 1.1.1 (2015-06-06)
+
+Bugfixes:
+
+ - Fix saving binary callback data
+
 ## 1.1.0 (2015-05-28)
 
 Features:
