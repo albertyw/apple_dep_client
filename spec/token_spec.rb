@@ -18,6 +18,17 @@ describe "AppleDEPClient::Token" do
     end
   end
 
+  describe ".create_temp_file" do
+    it "will not write a binary Tempfile by default" do
+      expect_any_instance_of(Tempfile).to_not receive :binmode
+      AppleDEPClient::Token.create_temp_file('asdf', 'qwer')
+    end
+    it "can write a binary Tempfile" do
+      expect_any_instance_of(Tempfile).to receive :binmode
+      AppleDEPClient::Token.create_temp_file('asdf', 'qwer', binary: true)
+    end
+  end
+
   describe ".run_command" do
     it "can run a command" do
       command = 'ls'
