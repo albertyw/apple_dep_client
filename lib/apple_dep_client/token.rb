@@ -27,8 +27,9 @@ module AppleDEPClient
       decrypted_data
     end
 
-    def self.create_temp_file(name, data)
+    def self.create_temp_file(name, data, binary: false)
       file = Tempfile.new name
+      file.binmode if binary
       file.write data
       file.size # flush data to disk
       file

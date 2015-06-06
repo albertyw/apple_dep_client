@@ -13,7 +13,7 @@ module AppleDEPClient
     end
 
     def self.decrypt_data(callback_data)
-      data = AppleDEPClient::Token.create_temp_file('data', callback_data)
+      data = AppleDEPClient::Token.create_temp_file('data', callback_data, binary: true)
       command = "openssl asn1parse -inform DER -in #{data.path}"
       decrypted_data = AppleDEPClient::Token.run_command command
       AppleDEPClient::Token.remove_temp_file data
