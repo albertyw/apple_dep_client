@@ -11,6 +11,7 @@ describe AppleDEPClient::Callback do
 
   describe ".decrypt_data" do
     it "will decrypt data and remove encryption data" do
+      expect(AppleDEPClient::Token).to receive(:create_temp_file).with('data', 'asdf', binary: true).and_call_original
       expect(AppleDEPClient::Token).to receive(:run_command).and_return('data').once
       expect(AppleDEPClient::Callback).to receive(:remove_encryption_data).with('data').once
       AppleDEPClient::Callback.decrypt_data 'asdf'
