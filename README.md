@@ -11,10 +11,15 @@ This gem allows for easy interaction with the Apple DEP API.
 Read this gem from Github.  Since it's a private repository, you may want to
 refer to http://stackoverflow.com/a/13261333.
 
-This gem also requires an updated version of the `plist` gem from
+This gem requires an updated version of the `plist` gem from
 https://github.com/cellabus/plist so you may want to add
 `gem 'plist', git: 'https://github.com/cellabus/plist', ref: '3.1.2'` to your
 software's `Gemfile`.
+
+This gem also also requires `OpenSSL` to be installed.  You can test it by
+running `require 'openssl'` in `irb` and checking that it works.
+
+This will be uploaded to https://rubygems.org/ some day.
 
 ## Usage
 
@@ -24,6 +29,10 @@ about the high level usage of their DEP Workflow.  All commands are under the
 automatically handle OAuth for DEP endpoints.
 
 ## Getting DEP Server Tokens
+
+In order for you to read the DEP tokens returned by Apple from a DEP account,
+you must decrypt it using a private key.  This will give the individual
+keys needed for issuing commands to the DEP devices.
 
 ```ruby
 AppleDEPClient.configure do |config|
@@ -38,7 +47,8 @@ token_data[:consumer_secret]
 
 ## Interacting with DEP endpoints
 
-e.g.
+The main DEP management commands are issued like this.  See Apple's
+`MDM Protocol Reference` for information about all the commands.
 
 ```ruby
 AppleDEPClient.configure do |config|
@@ -54,6 +64,20 @@ data["server_name"]
 data["server_uuid"]
 data["org_name"]
 ...
+```
+
+The full list of commands is
+
+```
+AppleDEPClient::Account.fetch
+AppleDEPClient::Device.fetch(cursor: nil)
+AppleDEPClient::Device.sync(cursor){|device| pass }
+AppleDEPClient::Device.details(devices)
+AppleDEPClient::Device.disown(devices)
+AppleDEPClient::Profile.define(profile_hash)
+AppleDEPClient::Profile.assign(profile_uuid, devices)
+AppleDEPClient::Profile.fetch(profile_uuid)
+AppleDEPClient::Profile.remove(devices)
 ```
 
 ## Device Callbacks
@@ -73,5 +97,7 @@ data["SERIAL"]
 
 There is an example script at `example/example.rb` which can be run against
 Apple's DEP simulator.  You'll need to download the simulator binary and
-run it by `path/to/depsim start -p 80 example/depsim_config.json`.  You can
-then run the script using `bundle exec ruby example/example.rb`.
+run it with `path/to/depsim start -p 80 example/depsim_config.json`.  You can
+then run the script using `bundle exec ruby example/example.rb`.  `example.rb`
+can of course be edited to use real DEP keys for manual DEP work (but be
+careful to keep the keys secret).
