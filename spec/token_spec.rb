@@ -14,7 +14,7 @@ describe "AppleDEPClient::Token" do
       expect(AppleDEPClient::Token).to receive(:create_temp_file).twice.and_call_original
       expect(AppleDEPClient::Token).to receive(:remove_temp_file).twice
       expect(AppleDEPClient::Token).to receive(:run_command).once.and_return ''
-      expect{AppleDEPClient::Token.decode_token('sample data')}.to raise_error
+      expect{AppleDEPClient::Token.decode_token('sample data')}.to raise_error AppleDEPClient::Error::TokenError
     end
   end
 

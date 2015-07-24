@@ -58,5 +58,8 @@ module AppleDEPClient
     class RequestError < RuntimeError
     end
 
+    class TokenError < RuntimeError
+    end
+
   end
 end

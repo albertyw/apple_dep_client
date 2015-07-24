@@ -23,7 +23,7 @@ module AppleDEPClient
       decrypted_data = run_command command
       remove_temp_file data
       remove_temp_file private_key
-      raise RuntimeError, "Incorrect data" if decrypted_data.nil? or decrypted_data == ''
+      raise AppleDEPClient::Error::TokenError, "Incorrect data" if decrypted_data.nil? or decrypted_data == ''
       decrypted_data
     end
 
