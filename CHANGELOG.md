@@ -1,3 +1,9 @@
+## 1.1.2 (2015-07-23)
+
+Features:
+
+ - Change token decryption errors from RuntimeError to TokenError
+
 ## 1.1.1 (2015-06-06)
 
 Bugfixes:
