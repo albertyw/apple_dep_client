@@ -1,6 +1,7 @@
 # Methods for processing DEP Server Tokens
 
 require 'json'
+require 'open3'
 require 'openssl'
 require 'tempfile'
 
@@ -20,10 +21,12 @@ module AppleDEPClient
       data = create_temp_file('data', smime_data)
       private_key = create_temp_file('key', AppleDEPClient.private_key)
       command = "openssl smime -decrypt -in #{data.path} -inkey #{private_key.path} -text"
-      decrypted_data = run_command command
+      decrypted_data, errors = run_command command
       remove_temp_file data
       remove_temp_file private_key
-      raise AppleDEPClient::Error::TokenError, "Incorrect data" if decrypted_data.nil? or decrypted_data == ''
+      if decrypted_data == '' or errors != ''
+        raise AppleDEPClient::Error::TokenError, "Incorrect data #{errors}"
+      end
       decrypted_data
     end
 
@@ -41,7 +44,8 @@ module AppleDEPClient
     end
 
     def self.run_command command
-      `#{command}`
+      stdin, stdout, stderr = Open3.popen3 command
+      [stdout.read, stderr.read]
     end
 
     def self.parse_data(data)
