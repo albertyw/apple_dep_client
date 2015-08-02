@@ -1,3 +1,10 @@
+## 1.1.3 (2015-08-01)
+
+Features:
+
+ - Don't send token decryption errors to stdout
+ - Update README with more information
+
 ## 1.1.2 (2015-07-23)
 
 Features:
