@@ -37,7 +37,7 @@ module AppleDEPClient
       ["DescriptionInvalid",  400, 'DESCRIPTION_INVALID' ],
       ["MagicInvalid",        400, 'MAGIC_INVALID' ],
       ["ProfileUUIDRequired", 400, 'PROFILE_UUID_REQUIRED' ],
-      ["ProfileNotFound",     400, 'PROFILE_NOT_FOUND' ],
+      ["ProfileNotFound",     404, 'PROFILE_NOT_FOUND' ],
     ]
 
     def self.check_request_error(response, auth:false)
