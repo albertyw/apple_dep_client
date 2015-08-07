@@ -1,3 +1,14 @@
+## 1.2.0 (2015-08-06)
+
+Features:
+
+ - Better error handling for undecryptable device callback data
+
+Bugfixes:
+
+ - Fix checking for PROFILE_NOT_FOUND errors when assigning or fetching profiles
+ - Fix decrypting device callback data
+
 ## 1.1.3 (2015-08-01)
 
 Features:
