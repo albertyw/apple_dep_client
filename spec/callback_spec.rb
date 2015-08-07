@@ -16,6 +16,12 @@ describe AppleDEPClient::Callback do
       expect(AppleDEPClient::Callback).to receive(:remove_encryption_data).with('data').once
       AppleDEPClient::Callback.decrypt_data 'asdf'
     end
+    it "will raise an error if the data cannot be decrypted" do
+      expect(AppleDEPClient::Token).to receive(:create_temp_file).with('data', 'asdf', binary: true).and_call_original
+      expect(AppleDEPClient::Token).to receive(:run_command).and_return(['', 'error']).once
+      expect(AppleDEPClient::Callback).to_not receive(:remove_encryption_data)
+      expect{AppleDEPClient::Callback.decrypt_data 'asdf'}.to raise_error AppleDEPClient::Error::CallbackError
+    end
   end
 
   describe ".remove_encryption_data" do

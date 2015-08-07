@@ -17,6 +17,9 @@ module AppleDEPClient
       command = "openssl asn1parse -inform DER -in #{data.path}"
       decrypted_data, errors = AppleDEPClient::Token.run_command command
       AppleDEPClient::Token.remove_temp_file data
+      if decrypted_data == '' or errors != ''
+        raise AppleDEPClient::Error::CallbackError, "Incorrect data #{errors}"
+      end
       remove_encryption_data(decrypted_data)
     end
 

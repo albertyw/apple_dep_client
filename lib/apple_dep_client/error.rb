@@ -61,5 +61,8 @@ module AppleDEPClient
     class TokenError < RuntimeError
     end
 
+    class CallbackError < RuntimeError
+    end
+
   end
 end
