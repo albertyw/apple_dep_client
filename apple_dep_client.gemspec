@@ -6,10 +6,11 @@ require 'apple_dep_client/version'
 Gem::Specification.new do |spec|
   spec.name          = "apple_dep_client"
   spec.version       = AppleDEPClient::VERSION
+  spec.licenses      = ['MIT']
   spec.authors       = ["Albert Wang"]
   spec.email         = ["albert@cellabus.com"]
-  spec.description   = %q{Client for Apple Device Enrollment Program}
-  spec.summary       = %q{This gem provides an easy way to authenticate and interact with Apple's Device Enrollment Program}
+  spec.summary       = %q{Client for Apple Device Enrollment Program}
+  spec.description   = %q{This gem provides an easy way to authenticate and interact with Apple's Device Enrollment Program}
   spec.homepage      = "https://github.com/cellabus/apple_dep_client"
 
   spec.files         = `git ls-files`.split($/)
