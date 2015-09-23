@@ -1,3 +1,10 @@
+## 2.0.0 (2015-09-23)
+
+Features:
+
+ - `apple_dep_client` is now open source with an MIT license
+ - Updates to documentation
+
 ## 1.2.0 (2015-08-06)
 
 Features:
