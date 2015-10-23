@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "AppleDEPClient::VERSION" do
   it "has a version" do

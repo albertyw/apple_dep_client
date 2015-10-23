@@ -1,16 +1,16 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'apple_dep_client/version'
+require "apple_dep_client/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "apple_dep_client"
   spec.version       = AppleDEPClient::VERSION
-  spec.licenses      = ['MIT']
+  spec.licenses      = ["MIT"]
   spec.authors       = ["Albert Wang"]
   spec.email         = ["albert@cellabus.com"]
-  spec.summary       = %q{Client for Apple Device Enrollment Program}
-  spec.description   = %q{This gem provides an easy way to authenticate and interact with Apple's Device Enrollment Program}
+  spec.summary       = "Client for Apple Device Enrollment Program"
+  spec.description   = "This gem provides an easy way to authenticate and interact with Apple's Device Enrollment Program"
   spec.homepage      = "https://github.com/cellabus/apple_dep_client"
 
   spec.files         = `git ls-files`.split($/)

@@ -1,7 +1,7 @@
-require 'codeclimate-test-reporter'
+require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 
-require 'apple_dep_client'
+require "apple_dep_client"
 
 RSpec.configure do |config|
   config.before(:each) do

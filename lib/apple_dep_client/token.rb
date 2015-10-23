@@ -1,9 +1,9 @@
 # Methods for processing DEP Server Tokens
 
-require 'json'
-require 'open3'
-require 'openssl'
-require 'tempfile'
+require "json"
+require "open3"
+require "openssl"
+require "tempfile"
 
 module AppleDEPClient
   module Token
@@ -18,13 +18,13 @@ module AppleDEPClient
     end
 
     def self.decrypt_data(smime_data)
-      data = create_temp_file('data', smime_data)
-      private_key = create_temp_file('key', AppleDEPClient.private_key)
+      data = create_temp_file("data", smime_data)
+      private_key = create_temp_file("key", AppleDEPClient.private_key)
       command = "openssl smime -decrypt -in #{data.path} -inkey #{private_key.path} -text"
       decrypted_data, errors = run_command command
       remove_temp_file data
       remove_temp_file private_key
-      if decrypted_data == '' or errors != ''
+      if decrypted_data == "" || errors != ""
         raise AppleDEPClient::Error::TokenError, "Incorrect data #{errors}"
       end
       decrypted_data
@@ -43,20 +43,20 @@ module AppleDEPClient
       file.unlink
     end
 
-    def self.run_command command
+    def self.run_command(command)
       stdin, stdout, stderr = Open3.popen3 command
       [stdout.read, stderr.read]
     end
 
     def self.parse_data(data)
       data = strip_wrappers data
-      data = JSON.parse(data, {symbolize_names: true})
+      data = JSON.parse(data, symbolize_names: true)
       save_data data
       data
     end
 
-    def self.strip_wrappers data
-      data = data.sub('-----BEGIN MESSAGE-----', '').sub('-----END MESSAGE-----', '')
+    def self.strip_wrappers(data)
+      data = data.sub("-----BEGIN MESSAGE-----", "").sub("-----END MESSAGE-----", "")
       data.strip
     end
 

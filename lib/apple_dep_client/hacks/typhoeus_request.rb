@@ -1,11 +1,11 @@
 # This contains a few hacks that adds support for non-ancient versions of Typhoeus to
 # the ancient dead ruby oauth gem
 
-require 'oauth/request_proxy/base'
-require 'typhoeus'
-require 'typhoeus/request'
-require 'uri'
-require 'cgi'
+require "oauth/request_proxy/base"
+require "typhoeus"
+require "typhoeus/request"
+require "uri"
+require "cgi"
 
 module OAuth::RequestProxy::Typhoeus
   class Request < OAuth::RequestProxy::Base
@@ -23,7 +23,7 @@ module OAuth::RequestProxy::Typhoeus
 
     def method
       request_method = request.options[:method].to_s.upcase
-      request_method.empty? ? 'GET' : request_method
+      request_method.empty? ? "GET" : request_method
     end
 
     def uri
@@ -47,7 +47,7 @@ module OAuth::RequestProxy::Typhoeus
 
     def post_parameters
       # Post params are only used if posting form data
-      if method == 'POST'
+      if method == "POST"
         OAuth::Helper.stringify_keys(request.params || {})
       else
         {}
