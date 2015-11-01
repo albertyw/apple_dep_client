@@ -10,7 +10,7 @@ module AppleDEPClient
     REMOVE_PATH = "/profile/devices"
 
     PROFILE_KEYS = [:profile_name, :url, :allow_pairing, :is_supervised,
-                    :is_mandatory, :is_mdm_removable, :support_phone_number,
+                    :is_mandatory, :await_device_configured, :is_mdm_removable, :support_phone_number,
                     :support_email_address, :org_magic, :anchor_certs, :supervising_host_certs,
                     :skip_setup_items, :department, :devices]
 
