@@ -1,3 +1,10 @@
+## 2.0.1 (2015-10-30)
+
+Features:
+
+ - Allow newer versions of typhoeus
+ - Run rubocop and fix coding style issues
+
 ## 2.0.0 (2015-09-23)
 
 Features:
