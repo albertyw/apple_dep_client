@@ -82,6 +82,7 @@ describe AppleDEPClient::Device do
   describe ".disown" do
     it "will make a request to disown devices" do
       devices = ["asdf"]
+      expect(Kernel).to receive(:warn)
       expect(AppleDEPClient::Request).to receive(:make_request).and_return("devices" => { "asdf" => "SUCCESS" })
       devices = AppleDEPClient::Device.disown devices
       expect(devices).to eq("asdf" => "SUCCESS")

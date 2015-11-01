@@ -49,7 +49,9 @@ module AppleDEPClient
     # Accepts an array of device ID strings
     # WARNING - this will remove devices from DEP accounts and
     # may render devices permanently inoperable
+    # DEPRECATED by Apple
     def self.disown(devices)
+      Kernel.warn "Disown is a deprecated request and may not be supported in the future"
       body = { "devices" => devices }
       body = JSON.dump body
       response = AppleDEPClient::Request.make_request(AppleDEPClient::Request.make_url(DISOWN_PATH), :post, body)
