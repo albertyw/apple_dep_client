@@ -1,3 +1,10 @@
+## 2.1.0 (2015-10-31)
+
+Features:
+
+ - Deprecate device disown (new for iOS 9)
+ - Allow `await_device_configured` setting in configuration profiles
+
 ## 2.0.1 (2015-10-30)
 
 Features:
@@ -20,7 +27,7 @@ Features:
 
 Bugfixes:
 
- - Fix checking for PROFILE_NOT_FOUND errors when assigning or fetching profiles
+ - Fix checking for `PROFILE_NOT_FOUND` errors when assigning or fetching profiles
  - Fix decrypting device callback data
 
 ## 1.1.3 (2015-08-01)
@@ -77,7 +84,7 @@ Features:
 
 Bugfixes:
 
- - Fix urls not respecting updates to the apple_dep_server config value
+ - Fix urls not respecting updates to the `apple_dep_server` config value
 
 ## 0.3.0 (2015-04-29)
 
