@@ -5,6 +5,7 @@
 [![Dependency Status](https://gemnasium.com/cellabus/apple_dep_client.svg)](https://gemnasium.com/cellabus/apple_dep_client)
 [![Code Climate](https://codeclimate.com/github/cellabus/apple_dep_client/badges/gpa.svg)](https://codeclimate.com/github/cellabus/apple_dep_client)
 [![Test Coverage](https://codeclimate.com/github/cellabus/apple_dep_client/badges/coverage.svg)](https://codeclimate.com/github/cellabus/apple_dep_client/coverage)
+[![security](https://hakiri.io/github/cellabus/apple_dep_client/master.svg)](https://hakiri.io/github/cellabus/apple_dep_client/master)
 
 This gem allows for easy interaction with the Apple DEP API.
 
