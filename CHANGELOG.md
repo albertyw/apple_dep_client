@@ -1,3 +1,9 @@
+## 2.1.1 (2016-01-13)
+
+Features:
+
+ - Officially support typhoeus 1.0
+
 ## 2.1.0 (2015-10-31)
 
 Features:
