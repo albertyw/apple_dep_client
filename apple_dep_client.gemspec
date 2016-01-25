@@ -6,7 +6,7 @@ require "apple_dep_client/version"
 Gem::Specification.new do |spec|
   spec.name          = "apple_dep_client"
   spec.version       = AppleDEPClient::VERSION
-  spec.licenses      = ["MIT"]
+  spec.license       = "AGPL-3.0"
   spec.authors       = ["Albert Wang"]
   spec.email         = ["albert@cellabus.com"]
   spec.summary       = "Client for Apple Device Enrollment Program"
