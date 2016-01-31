@@ -4,4 +4,4 @@ source "https://rubygems.org"
 gemspec
 
 # This isn't in the gemspec file because it is being read from github
-gem "plist", git: "https://github.com/cellabus/plist", ref: "3.1.2" # Used to handle responses in plist format
+gem "plist", git: "https://github.com/cellabus/plist" # Used to handle responses in plist format
