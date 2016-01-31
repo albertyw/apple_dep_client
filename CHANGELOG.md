@@ -1,3 +1,10 @@
+## 2.2.0 (2016-01-31)
+
+Features:
+
+ - Change license to GPL
+ - Uncap plist gem version
+
 ## 2.1.1 (2016-01-13)
 
 Features:
