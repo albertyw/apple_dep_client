@@ -1,3 +1,9 @@
+## 2.2.1 (2016-07-23)
+
+Features:
+
+ - Updates to rake, typhoeus, and oauth
+
 ## 2.2.0 (2016-01-31)
 
 Features:
