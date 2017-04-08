@@ -24,7 +24,7 @@ software's `Gemfile`.
 
 ## Usage
 
-See Apple's `Mobile Device Management Protocol Reference` for more information
+See Apple's [Mobile Device Management Protocol Reference](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html) for more information
 about the high level usage of their DEP Workflow.  All commands are under the
 `AppleDEPClient` namespace.  `AppleDEPClient` will
 automatically handle OAuth for DEP endpoints.
