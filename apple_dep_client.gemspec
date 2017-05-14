@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["albert@cellabus.com"]
   spec.summary       = "Client for Apple Device Enrollment Program"
   spec.description   = "This gem provides an easy way to authenticate and interact with Apple's Device Enrollment Program"
-  spec.homepage      = "https://github.com/cellabus/apple_dep_client"
+  spec.homepage      = "https://github.com/albertyw/apple_dep_client"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
