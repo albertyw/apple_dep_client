@@ -1,3 +1,10 @@
+## 2.2.2 (2017-05-21)
+
+Cleanup:
+
+ - Repository is now at https://github.com/albertyw/apple_dep_client
+ - Fixed deprecation in code coverage package
+
 ## 2.2.1 (2016-07-23)
 
 Features:
