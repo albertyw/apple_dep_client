@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = AppleDEPClient::VERSION
   spec.license       = "AGPL-3.0"
   spec.authors       = ["Albert Wang"]
-  spec.email         = ["albert@cellabus.com"]
+  spec.email         = ["git@albertyw.com"]
   spec.summary       = "Client for Apple Device Enrollment Program"
   spec.description   = "This gem provides an easy way to authenticate and interact with Apple's Device Enrollment Program"
   spec.homepage      = "https://github.com/albertyw/apple_dep_client"
