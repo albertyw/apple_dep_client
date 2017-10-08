@@ -18,8 +18,8 @@ This gem also also requires `OpenSSL` to be installed.  You can test it by
 running `require 'openssl'` in `irb` and checking that it works.
 
 It is highly recommended that you use a patched version of the `plist` gem
-available at https://github.com/cellabus/plist.  To do so, you should add
-`gem 'plist', git: 'https://github.com/cellabus/plist', ref: '3.1.2'` to your
+available at https://github.com/albertyw/plist.  To do so, you should add
+`gem 'plist', git: 'https://github.com/albertyw/plist', ref: '3.1.2'` to your
 software's `Gemfile`.
 
 ## Usage
