@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "oauth", "~> 0.5.6"
-  spec.add_dependency "typhoeus", [">= 0.7", "< 1.2"]
+  spec.add_dependency "typhoeus", "~> 1.4.0"
   spec.add_dependency "plist", ">= 3.1" # See Gemfile
   spec.add_development_dependency "bundler", "~> 2.2"
   spec.add_development_dependency "rake", "~> 13"
