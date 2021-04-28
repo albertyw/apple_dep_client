@@ -19,10 +19,11 @@ steps:
   - name: Upload to RubyGems
     image: ruby:3.0.1
     commands:
-      - gem push -V apple_dep_client
+      - gem build apple_dep_client.gemspec
+      - gem push -V *.gem
     environment:
       GEM_HOST_API_KEY:
         from_secret: RUBYGEMS_API_KEY
-    #when:
-    #  event:
-    #    - tag
+    when:
+      event:
+        - tag
