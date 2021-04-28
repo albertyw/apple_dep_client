@@ -24,6 +24,6 @@ steps:
     environment:
       GEM_HOST_API_KEY:
         from_secret: RUBYGEMS_API_KEY
-    #when:
-    #  event:
-    #    - tag
+    when:
+      event:
+        - tag
