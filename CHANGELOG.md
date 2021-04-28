@@ -1,3 +1,12 @@
+## 2.2.3 (2021-04-28)
+
+Cleanup:
+
+ - Update dependencies
+ - Switch CI from Codeship to Drone
+ - README updates
+
+
 ## 2.2.2 (2017-05-21)
 
 Cleanup:
