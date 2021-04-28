@@ -1,7 +1,7 @@
 # Apple Device Enrollment Program Client
 
 [![Gem Version](https://badge.fury.io/rb/apple_dep_client.svg)](https://badge.fury.io/rb/apple_dep_client)
-[ ![Codeship Status for albertyw/apple_dep_client](https://app.codeship.com/projects/0993f370-8de3-0135-0897-5a65ff81d7de/status?branch=master)](https://app.codeship.com/projects/249720)
+[![Build Status](https://drone.albertyw.com/api/badges/albertyw/apple_dep_client/status.svg)](https://drone.albertyw.com/albertyw/apple_dep_client)
 [![Dependency Status](https://img.shields.io/librariesio/release/rubygems/apple_dep_client.svg)](https://libraries.io/rubygems/apple_dep_client)
 [![Code Climate](https://codeclimate.com/github/albertyw/apple_dep_client/badges/gpa.svg)](https://codeclimate.com/github/albertyw/apple_dep_client)
 [![Test Coverage](https://codeclimate.com/github/albertyw/apple_dep_client/badges/coverage.svg)](https://codeclimate.com/github/albertyw/apple_dep_client/coverage)
