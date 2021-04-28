@@ -15,3 +15,14 @@ steps:
       - cc-test-reporter after-build --exit-code $? -t simplecov
     environment:
       CC_TEST_REPORTER_ID: dfac1bcda9df0ca61c7debeb31d56eeaee8f1388ea1d7487993dddfbae1ca282
+
+  - name: Upload to RubyGems
+    image: ruby:3.0.1
+    commands:
+      - gem push -V apple_dep_client
+    environment:
+      GEM_HOST_API_KEY:
+        from_secret: RUBYGEMS_API_KEY
+    #when:
+    #  event:
+    #    - tag
