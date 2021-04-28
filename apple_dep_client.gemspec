@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "oauth", "~> 0.5.6"
   spec.add_dependency "typhoeus", "~> 1.4.0"
-  spec.add_dependency "plist", ">= 3.1" # See Gemfile
+  spec.add_dependency "plist", "~> 3.6.0"
   spec.add_development_dependency "bundler", "~> 2.2"
   spec.add_development_dependency "rake", "~> 13"
   spec.add_development_dependency "rspec", "~> 3.10"
